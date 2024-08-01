@@ -1,4 +1,4 @@
-import React from 'react';
+
 import image from '../assets/banner.png'; // Asegúrate de tener esta imagen en tu carpeta de assets
 
 const Header = () => {
