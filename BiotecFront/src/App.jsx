@@ -9,8 +9,10 @@ import Register from "./components/Auth/Register";
 import Login from "./components/Auth/Login";
 import PanelPage from "./components/Admin/PanelPage";
 import CreateClient from "./components/Admin/CreateClient";
+import UpdateClient from "./components/Admin/UpdateClient"
 import ProductsPage from "./components/Admin/ProductsPage";
 import InvoicesPage from "./components/Admin/InvoicesPage";
+import CustomerList from "./components/Admin/CustomerList"
 
 const App = () => {
   const location = useLocation();
@@ -29,6 +31,8 @@ const App = () => {
             <Route path="/panel/products" element={<ProductsPage />} />
             <Route path="/panel/invoices" element={<InvoicesPage />} />
             <Route path="/panel/clients/create" element={<CreateClient />} />
+            <Route path="/panel/clients/update" element={<UpdateClient />} />
+            <Route path="/panel/clients/list" element={<CustomerList />} />
           </Routes>
           <Footer />
         </div>

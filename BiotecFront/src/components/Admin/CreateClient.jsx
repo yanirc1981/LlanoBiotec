@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createCustomerSiigo } from "../../Redux/ActionsSiigo/actionsSiigo";
+import { identificationOptions, 
+  check_digitOptions, 
+  fiscal_responsibilitiesOptions, 
+  state_codeOptions, city_codeOptions, Indicativo_Options , Contact_Indicativo_Options} from './options';
 
 const CreateClient = () => {
   const [formData, setFormData] = useState({
@@ -98,7 +102,6 @@ const CreateClient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Crear el objeto de datos para enviar al backend
     const payload = {
       type: formData.type,
       person_type: formData.person_type,
@@ -107,10 +110,10 @@ const CreateClient = () => {
       check_digit: formData.check_digit || '',
       name: personType === "Company" ? formData.commercial_name : `${firstName} ${lastName}`,
       commercial_name: personType === "Company" ? formData.commercial_name : '',
-      branch_office: 0, // Valor por defecto
-      active: true, // Valor por defecto
-      vat_responsible: false, // Valor por defecto
-      fiscal_responsibilities: [formData.fiscal_responsibilities], // Asegúrate de que esté en el formato correcto
+      branch_office: 0, 
+      active: true, 
+      vat_responsible: false, 
+      fiscal_responsibilities: [formData.fiscal_responsibilities], 
       address: {
         address: formData.address,
         city: {
@@ -146,7 +149,7 @@ const CreateClient = () => {
       },
     };
   
-    // Enviar los datos al backend
+    console.log('Datos a enviar:', JSON.stringify(payload, null, 2));
     const response = await dispatch(createCustomerSiigo(payload));
   
     if (response.success) {
@@ -158,6 +161,7 @@ const CreateClient = () => {
   
 
   return (
+    
     <form onSubmit={handleSubmit} className="space-y-8">
       <div className="border-b border-gray-900/10 pb-8">
         <p className="mt-1 ml-2 text-sm leading-6 text-gray-600 mb-6">
@@ -195,37 +199,21 @@ const CreateClient = () => {
               Tipo de Identificación
             </label>
             <div className="mt-2">
-              <select
-                id="id_type"
-                name="id_type"
-                value={idType}
-                onChange={handleIdTypeChange}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              >
-                <option value="">Seleccione una opción</option>
-                <option value="13">Cédula</option>
-                <option value="31">NIT</option>
-                <option value="22">Cédula de extranjería</option>
-                <option value="42">
-                  Documento de identificación extranjero
-                </option>
-                <option value="50">NIT de otro país</option>
-                <option value="R-00-PN">
-                  No obligado a registrarse en el RUT PN
-                </option>
-                <option value="91">NUIP</option>
-                <option value="41">Pasaporte</option>
-                <option value="47">Permiso especial de permanencia PEP</option>
-                <option value="11">Registro civil</option>
-                <option value="43">
-                  Sin identificación del exterior o para uso definido por la
-                  DIAN
-                </option>
-                <option value="21">Tarjeta de extranjería</option>
-                <option value="12">Tarjeta de identidad</option>
-              </select>
+                <select
+                    id="id_type"
+                    name="id_type"
+                    value={idType}
+                    onChange={handleIdTypeChange}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                >
+                    {identificationOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             </div>
-          </div>
+        </div>
 
           <div className="sm:col-span-3">
             <label
@@ -262,17 +250,11 @@ const CreateClient = () => {
                   onChange={handleChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 >
-                  <option value="">Selecciona una opción</option>
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
+                  {check_digitOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
                 </select>
               </div>
             </div>
@@ -355,13 +337,12 @@ const CreateClient = () => {
                 onChange={handleChange}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option value="">Selecciona una opción</option>
-                <option value="R-99-PN">No Aplica - Otros*</option>
-                <option value="O-13">Gran contribuyente</option>
-                <option value="O-15">Autorretenedor</option>
-                <option value="O-23">Agente de retención IVA</option>
-                <option value="O-47">Régimen simple de tributación</option>
-              </select>
+                {fiscal_responsibilitiesOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             </div>
           </div>
 
@@ -399,39 +380,13 @@ const CreateClient = () => {
                 onChange={handleChange}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option value="">Selecciona una opción</option>
-                <option value="05">Antioquía</option>
-                <option value="91">Amazonas</option>
-                <option value="81">Arauca</option>
-                <option value="08">Atlántico</option>
-                <option value="11">Bogotá D.C</option>
-                <option value="13">Bolivar</option>
-                <option value="15">Boyacá</option>
-                <option value="17">Caldas</option>
-                <option value="19">Cauca</option>
-                <option value="85">Casanare</option>
-                <option value="20">Cesar</option>
-                <option value="23">Córdoba</option>
-                <option value="25">Cundinamarca</option>
-                <option value="27">Chocó</option>
-                <option value="94">Guainía</option>
-                <option value="95">Guaviare</option>
-                <option value="41">Huila</option>
-                <option value="44">La Guajira</option>
-                <option value="47">Magdalena</option>
-                <option value="50">Meta</option>
-                <option value="52">Nariño</option>
-                <option value="54">Norte de Santander</option>
-                <option value="86">Putumayo</option>
-                <option value="63">Quindio</option>
-                <option value="66">Risaralda</option>
-                <option value="68">Santander</option>
-                <option value="70">Sucre</option>
-                <option value="73">Tolima</option>
-                <option value="76">Valle del Cauca</option>
-                <option value="97">Vaupés</option>
-                <option value="99">Vichada</option>
-              </select>
+              {state_codeOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
+                
             </div>
           </div>
 
@@ -450,50 +405,12 @@ const CreateClient = () => {
                 onChange={handleChange}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option value="">Selecciona una opción</option>
-                <option value="50006">Acacías - Meta</option>
-                <option value="85010">Aguazul - Casanare</option>
-                <option value="50110">Barranca De Upía - Meta</option>
-                <option value="05088">Bello - Antioquía</option>
-                <option value="11001">Bogotá - Bogotá D.C</option>
-                <option value="50124">Cabuyaro - Meta</option>
-                <option value="25126">Cajicá - Cundinamarca</option>
-                <option value="95015">Calamar - Guaviare</option>
-                <option value="25151">Caqueza - Cundinamarca</option>
-                <option value="50150">Castilla La Nueva - Meta</option>
-                <option value="50223">Cubarral - Meta</option>
-                <option value="50226">Cumaral - Meta</option>
-                <option value="50245">El Calvario - Meta</option>
-                <option value="50251">El Castillo - Meta</option>
-                <option value="50270">El Dorado - Meta</option>
-                <option value="50287">Fuente De Oro - Meta</option>
-                <option value="50313">Granada - Meta</option>
-                <option value="50318">Guamal - Meta</option>
-                <option value="73001">Ibagué - Tolima</option>
-                <option value="05360">Itagui - Antioquia</option>
-                <option value="25377">La Calera - Cundinamarca</option>
-                <option value="50350">La Macarena - Meta</option>
-                <option value="50400">Lejanías - Meta</option>
-                <option value="85139">Maní - Casanare</option>
-                <option value="50325">Mapiripán - Meta</option>
-                <option value="05001">Medellín - Antioqua</option>
-                <option value="25438">Medina - Cundinamarca</option>
-                <option value="50330">Mesetas - Meta</option>
-                <option value="19001">Popayan - Cauca</option>
-                <option value="50450">Puerto Concordia - Meta</option>
-                <option value="50568">Puerto Gaitán - Meta</option>
-                <option value="50577">Puerto Lleras - Meta</option>
-                <option value="50573">Puerto López - Meta</option>
-                <option value="50590">Puerto Rico - Meta</option>
-                <option value="50606">Restrepo - Meta</option>
-                <option value="50680">San Carlos De Guaroa - Meta</option>
-                <option value="50683">San Juan De Arama - Meta</option>
-                <option value="50686">San Juanito - Meta</option>
-                <option value="50689">San Martín - Meta</option>
-                <option value="50370">Uribe - Meta</option>
-                <option value="50001">Villavicencio - Meta</option>
-                <option value="50711">Vistahermosa - Meta</option>
-              </select>
+                {city_codeOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             </div>
           </div>
 
@@ -530,24 +447,12 @@ const CreateClient = () => {
                 onChange={handleChange}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option value="">Selecciona una opción</option>
-                <option value="57">57 - Celular</option>
-                <option value="601">601 - Cundinamarca - Bogotá</option>
-                <option value="602">602 - Cauca - Nariño - Valle</option>
-                <option value="604">604 - Antioquia - Córdoba - Chocó</option>
-                <option value="605">605 - Atlántico - Bolívar - César</option>
-                <option value="605">605 - Guajira - Magdalena - Sucre</option>
-                <option value="606">606 - Caldas - Quindío - Risaralda</option>
-                <option value="607">
-                  607 - Arauca - Santander - Norte de Santander
-                </option>
-                <option value="608">608 - Amazonas - Boyacá - Casanare</option>
-                <option value="608">608 - Caquetá - Guainía - Guaviare</option>
-                <option value="608">
-                  608 - Huila - Meta - Tolima - Putumayo
-                </option>
-                <option value="608">608 - San Andrés - Vaupés - Vichada</option>
-              </select>
+                {Indicativo_Options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             </div>
           </div>
 
@@ -681,24 +586,12 @@ const CreateClient = () => {
                 onChange={(e) => handleContactChange(e, 0)}
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
               >
-                <option value="">Selecciona una opción</option>
-                <option value="57">57 - Celular</option>
-                <option value="601">601 - Cundinamarca - Bogotá</option>
-                <option value="602">602 - Cauca - Nariño - Valle</option>
-                <option value="604">604 - Antioquia - Córdoba - Chocó</option>
-                <option value="605">605 - Atlántico - Bolívar - César</option>
-                <option value="605">605 - Guajira - Magdalena - Sucre</option>
-                <option value="606">606 - Caldas - Quindío - Risaralda</option>
-                <option value="607">
-                  607 - Arauca - Santander - Norte de Santander
-                </option>
-                <option value="608">608 - Amazonas - Boyacá - Casanare</option>
-                <option value="608">608 - Caquetá - Guainía - Guaviare</option>
-                <option value="608">
-                  608 - Huila - Meta - Tolima - Putumayo
-                </option>
-                <option value="608">608 - San Andrés - Vaupés - Vichada</option>
-              </select>
+                {Contact_Indicativo_Options.map((option) => (
+                        <option key={option.value} value={option.value}>
+                            {option.label}
+                        </option>
+                    ))}
+                </select>
             </div>
           </div>
           <div className="sm:col-span-3">

@@ -33,21 +33,21 @@ import {
   POST_GENERATE_INVOICE,
   PUT_CUSTOMER_SIIGO,
   PUT_PRODUCT_SIIGO,
+  DELETE_CUSTOMER_SIIGO
 } from '../ActionsSiigo/actions-types-siigo';
 
 const initialState = {
 
-  
-  customers: [], //
-  accounts: [], //
-  taxes: [], //
+  customers: [],
+  accounts: [],
+  taxes: [],
   costCenters: [],
-  productId: {}, //
-  products_siigo: [], //
-  customerId: {}, //
-  typeInvoices: [], //
-  usersSiigo: [], //
-  paymentsType: [], //
+  productId: {},
+  products_siigo: [],
+  customerId: {},
+  typeInvoices: [],
+  usersSiigo: [],
+  paymentsType: [],
   invoiceId: {},
   customer: {},
 };
@@ -87,9 +87,19 @@ const rootReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload || 'An error occurred',
       };
-    case PUT_CUSTOMER_SIIGO:
+      case DELETE_CUSTOMER_SIIGO:
       return {
         ...state,
+        customers: state.customers.filter(
+          (customer) => customer.id !== action.payload
+        ),
+      };
+      case PUT_CUSTOMER_SIIGO:
+      return {
+        ...state,
+        customers: state.customers.map((customer) =>
+          customer.id === action.payload.id ? action.payload : customer
+        ),
       };
     case GET_ACCOUNT_GROUP:
       return {

@@ -1,7 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import CreateClient from './CreateClient';
 import UpdateClient from './UpdateClient';
-import DeleteClient from './DeleteClient';
+import DeleteClient from './CustomerList';
 
 const PanelPage = () => {
   return (
@@ -18,7 +18,7 @@ const PanelPage = () => {
               <Link to="/panel/clients/update" className="text-blue-500 hover:underline">Actualizar Cliente</Link>
             </li>
             <li>
-              <Link to="/panel/clients/delete" className="text-blue-500 hover:underline">Borrar Cliente</Link>
+              <Link to="/panel/clients/list" className="text-blue-500 hover:underline">Listar Clientes</Link>
             </li>
           </ul>
         </li>

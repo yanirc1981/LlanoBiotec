@@ -33,6 +33,7 @@ import {
   POST_GENERATE_INVOICE,
   PUT_CUSTOMER_SIIGO,
   PUT_PRODUCT_SIIGO,
+  DELETE_CUSTOMER_SIIGO
 } from './actions-types-siigo';
 
 //const BASE_URL = 'https://lacteos7maravillas.onrender.com';
@@ -71,20 +72,43 @@ export const getCustomerById = (id /*{ headers }*/) => async (dispatch) => {
     dispatch({ type: GET_CUSTOMER_BY_ID, payload: data.data });
     return { success: true }; // Indica que la solicitud fue exitosa
   } catch (error) {
-    return { success: false, errorMessage: error.message }; // Indica que hubo un error con un mensaje específico
+    return { success: false, errorMessage: error.message }; 
   }
 };
 
 export const updateCustomerSiigo = (id, newData) => async (dispatch) => {
   try {
-    const url = `${BASE_URL}/siigo/customer/${id}`;
-    // Pasa newData como el segundo argumento de axios.put
-    const { data } = await axios.put(url, newData);
+    dispatch({ type: CUSTOMER_DETAILS_REQUEST });
 
-    dispatch({ type: PUT_CUSTOMER_SIIGO, payload: data }); // Actualiza el estado con los datos actualizados
-    return { success: true }; // Indica que la solicitud fue exitosa
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    const url = `${BASE_URL}/siigo/customer/${id}`;
+    
+    const { data } = await axios.put(url, newData, config);
+
+    dispatch({ type: PUT_CUSTOMER_SIIGO, payload: data }); 
+    dispatch({ type: CUSTOMER_DETAILS_SUCCESS, payload: data });
+
+    return { success: true }; 
   } catch (error) {
-    return { success: false, errorMessage: error.message }; // Indica que hubo un error con un mensaje específico
+    dispatch({ type: CUSTOMER_DETAILS_FAIL, payload: error.response ? error.response.data.message : error.message });
+
+    return { success: false, errorMessage: error.message }; 
+  }
+};
+
+export const deleteCustomerSiigo = (id) => async (dispatch) => {
+  try {
+    const url = `${BASE_URL}/siigo/customer/${id}`;
+    await axios.delete(url);
+    dispatch({ type: DELETE_CUSTOMER_SIIGO, payload: id });
+    return { success: true };
+  } catch (error) {
+    return { success: false, errorMessage: error.message };
   }
 };
 
