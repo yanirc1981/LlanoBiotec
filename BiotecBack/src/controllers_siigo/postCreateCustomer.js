@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
     // Modificar los datos al formato requerido por la API
     const body = {
-      type: originalData.type,
+      
       person_type: originalData.person_type,
       id_type: originalData.id_type,
       identification: originalData.identification,
@@ -60,7 +60,7 @@ module.exports = async (req, res) => {
     };
 
    
-    //  const customersResponse = await axios.post('https://private-anon-e45f86fe00-siigoapi.apiary-proxy.com/v1/customers', body, {
+    //  const customersResponse = await axios.post('https://private-anon-e45f86fe00-siigoapi.apiary-mock.com/v1/customers/id', body, {
     //     headers: {
     //    'Content-Type': 'application/json',
     //    'Authorization': `Bearer ${accessToken}`,
