@@ -1,23 +1,16 @@
 const axios = require('axios');
-const https = require('https');
 const getAccessToken = require('./getAccessToken');
 const response = require('../utils/response');
+const { PARTNER_ID } = require('../config/envs');
 
 module.exports = async (req, res) => {
   try {
     // Obtener el token de acceso
     //const accessToken = await getAccessToken();
-
-    // Crear un agente HTTPS que use TLS 1.2
-    // const agent = new https.Agent({
-    //   secureProtocol: 'TLSv1_2_method'
-    // });
-
-    // Datos a enviar a la API
     const originalData = req.body;
 
     // Modificar los datos al formato requerido por la API
-    const data = {
+    const body = {
       type: originalData.type,
       person_type: originalData.person_type,
       id_type: originalData.id_type,
@@ -28,7 +21,9 @@ module.exports = async (req, res) => {
       branch_office: 0, // Valor por defecto
       active: true, // Valor por defecto
       vat_responsible: false, // Valor por defecto
-      fiscal_responsibilities: [{ code: originalData.fiscal_responsibilities }],
+      fiscal_responsibilities: [{ code: originalData.fiscal_responsibilities }
+
+      ],
       address: {
         address: originalData.address,
         city: {
@@ -64,17 +59,18 @@ module.exports = async (req, res) => {
       },
     };
 
-    // Realizar la solicitud a la API con los datos modificados
-    // const response = await axios.post('https://api.siigo.com/v1/customers', data, {
+   
+    //  const customersResponse = await axios.post('https://private-anon-e45f86fe00-siigoapi.apiary-proxy.com/v1/customers', body, {
     //     headers: {
     //    'Content-Type': 'application/json',
     //    'Authorization': `Bearer ${accessToken}`,
-    //    'Partner-Id': 'NombreDeTuAplicacion'
+    //    'Partner-Id': 'PARTNER_ID'
     // },
-    //  httpsAgent: agent
+     
     // });
 
-    console.log(data);
+    console.log(JSON.stringify(body, null, 2));
+
     return response(res, 201, 'Cliente creado correctamente'); // Devolver la respuesta de la API
   } catch (error) {
     if (error.response) {
@@ -99,5 +95,5 @@ module.exports = async (req, res) => {
     }
   }
 };
-const response = require('../utils/response');
+
 
