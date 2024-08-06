@@ -1,6 +1,7 @@
 import React from 'react';
 import image from '../assets/banner.png';
 import image2 from '../../public/llanoBaner.png'
+import TabbedImages from './TabbedImages';
 
 function Body() {
   return (
@@ -11,7 +12,8 @@ function Body() {
         Distribuidor de importantes Casas de Genética Bovina y respaldado por las mejores marcas en implementos, medicamentos hormonales y productos para salud reproductiva bovina        </p>
         <img src={image} alt="About us" className="w-full h-auto mt-4" /><p className=''>
         Distribuidor de importantes Casas de Genética Bovina y respaldado por las mejores marcas en implementos, medicamentos hormonales y productos para salud reproductiva bovina        </p>
-        <img src={image2} alt="About us" className="w-full h-auto mt-4" />
+        {/* <img src={image2} alt="About us" className="w-full h-auto mt-4" /> */}
+        <TabbedImages/>
 
         
       </section>
