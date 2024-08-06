@@ -1,5 +1,6 @@
 import React from 'react';
 import image from '../assets/banner.png';
+import image2 from '../../public/llanoBaner.png'
 
 function Body() {
   return (
@@ -10,6 +11,7 @@ function Body() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, pulvinar facilisis justo mollis, auctor consequat urna.
         </p>
         <img src={image} alt="About us" className="w-full h-auto mt-4" />
+        <img src={image2} alt="About us" className="w-full h-auto mt-4" />
       </section>
 
       <section id="features" className="grid grid-cols-1 md:grid-cols-3 gap-4">
