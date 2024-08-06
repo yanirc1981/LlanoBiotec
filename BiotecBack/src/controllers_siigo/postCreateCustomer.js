@@ -2,11 +2,12 @@ const axios = require('axios');
 const getAccessToken = require('./getAccessToken');
 const response = require('../utils/response');
 const { PARTNER_ID } = require('../config/envs');
+const Customer = require('../models/Customer'); // Importa tu modelo de Sequelize
 
 module.exports = async (req, res) => {
   try {
     // Obtener el token de acceso
-    //const accessToken = await getAccessToken();
+    const accessToken = await getAccessToken();
     const originalData = req.body;
 
     // Modificar los datos al formato requerido por la API
@@ -21,9 +22,7 @@ module.exports = async (req, res) => {
       branch_office: 0, // Valor por defecto
       active: true, // Valor por defecto
       vat_responsible: false, // Valor por defecto
-      fiscal_responsibilities: [{ code: originalData.fiscal_responsibilities }
-
-      ],
+      fiscal_responsibilities: [{ code: originalData.fiscal_responsibilities }],
       address: {
         address: originalData.address,
         city: {
@@ -59,19 +58,52 @@ module.exports = async (req, res) => {
       },
     };
 
-   
-    //  const customersResponse = await axios.post('https://private-anon-e45f86fe00-siigoapi.apiary-proxy.com/v1/customers', body, {
-    //     headers: {
-    //    'Content-Type': 'application/json',
-    //    'Authorization': `Bearer ${accessToken}`,
-    //    'Partner-Id': 'PARTNER_ID'
-    // },
-     
-    // });
+    // Guardar el cliente en la base de datos local
+    const newCustomerLocal = await Customer.create({
+      type: originalData.type,
+      person_type: originalData.person_type,
+      id_type: originalData.id_type,
+      identification: originalData.identification,
+      check_digit: originalData.check_digit || '',
+      name: originalData.name,
+      commercial_name: originalData.commercial_name || '',
+      branch_office: 0, // Valor por defecto
+      active: true, // Valor por defecto
+      vat_responsible: false, // Valor por defecto
+      fiscal_responsibilities: originalData.fiscal_responsibilities,
+      address: originalData.address,
+      country_code: originalData.country_code,
+      state_code: originalData.state_code,
+      city_code: originalData.city_code,
+      postal_code: originalData.postal_code,
+      indicative: originalData.indicative,
+      number: originalData.number,
+      extension: originalData.extension || '',
+      first_name: originalData.first_name,
+      last_name: originalData.last_name,
+      email: originalData.email,
+      comments: originalData.comments,
+      seller_id: originalData.seller_id,
+      collector_id: originalData.collector_id,
+    });
 
-    console.log(JSON.stringify(body, null, 2));
+    // Enviar el cliente a la API de Siigo
+    const customersResponse = await axios.post(
+      'https://private-anon-e45f86fe00-siigoapi.apiary-proxy.com/v1/customers',
+      body,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+          'Partner-Id': PARTNER_ID,
+        },
+      }
+    );
 
-    return response(res, 201, 'Cliente creado correctamente'); // Devolver la respuesta de la API
+    const customerData = customersResponse.data;
+
+    // Devolver la respuesta de la API junto con los datos guardados localmente
+    return response(res, 201, { customerData, newCustomerLocal });
   } catch (error) {
     if (error.response) {
       // Si hay una respuesta de error de la API de Siigo
@@ -89,11 +121,10 @@ module.exports = async (req, res) => {
     } else {
       // Si el error no tiene una respuesta de la API de Siigo
       console.error('Error al enviar los datos a la API:', error.message);
-      return res
-        .status(500)
-        .json({ error: 'No se pudo enviar los datos a la API' });
+      return res.status(500).json({ error: 'No se pudo enviar los datos a la API' });
     }
   }
 };
+
 
 

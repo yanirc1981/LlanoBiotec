@@ -10,8 +10,8 @@ import Login from "./components/Auth/Login";
 import PanelPage from "./components/Admin/PanelPage";
 import CreateClient from "./components/Admin/CreateClient";
 import UpdateClient from "./components/Admin/UpdateClient"
-import ProductsPage from "./components/Admin/ProductsPage";
-import InvoicesPage from "./components/Admin/InvoicesPage";
+import ProductForm from "./components/Admin/ProductForm";
+import InvoiceForm from "./components/Admin/InvoiceForm";
 import CustomerList from "./components/Admin/CustomerList"
 
 const App = () => {
@@ -28,8 +28,8 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/panel/*" element={<PanelPage />} />
-            <Route path="/panel/products" element={<ProductsPage />} />
-            <Route path="/panel/invoices" element={<InvoicesPage />} />
+            <Route path="/panel/products/create" element={<ProductForm />} />
+            <Route path="/panel/invoices" element={<InvoiceForm />} />
             <Route path="/panel/clients/create" element={<CreateClient />} />
             <Route path="/panel/clients/update" element={<UpdateClient />} />
             <Route path="/panel/clients/list" element={<CustomerList />} />
