@@ -9,32 +9,42 @@ function Body() {
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, pulvinar facilisis justo mollis, auctor consequat urna.
         </p>
-        <img src={image} alt="About us" className="w-full h-auto mt-4" /> {/* Asegúrate de tener esta imagen en tu carpeta de assets */}
+        <img src={image} alt="About us" className="w-full h-auto mt-4" />
       </section>
 
       <section id="features" className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card title="Card 1" description="This is the description for card 1." />
-        <Card title="Card 2" description="This is the description for card 2." />
-        <Card title="Card 3" description="This is the description for card 3." />
+        <Card title="Card 1" description="This is the description for card 1." imageSrc="../public/biotec.png" />
+        <Card title="Card 2" description="This is the description for card 2." imageSrc="../public/biotec.png" />
+        <Card title="Card 3" description="This is the description for card 3." imageSrc="../public/biotec.png" />
       </section>
     </main>
   );
 };
 
-const Card = ({ title, description }) => {
+const Card = ({ title, description, imageSrc }) => {
   return (
-    <div className="relative w-full h-64 bg-blue-500 text-white flex items-center justify-center cursor-pointer group perspective">
-      <div className="absolute inset-0 bg-amber-900 group-hover:rotate-y-180 backface-hidden transition-transform duration-700 flex items-center justify-center">
-        <div>
-          <h3 className="text-xl">{title}</h3>
+    <div className="relative w-full h-64 perspective">
+      <div className="card-inner">
+        {/* Front Side */}
+        <div className="card-face card-front">
+          <div>
+            <h3 className="text-xl">{title}</h3>
+          </div>
+        </div>
+
+        {/* Back Side */}
+        <div className="card-face card-back p-4">
           <p>{description}</p>
         </div>
-      </div>
-      <div className="absolute inset-0 bg-amber-900 rotate-y-180 backface-hidden transition-transform duration-700 flex items-center justify-center">
-        <img src="./assets/card-image.jpg" alt="Card Image" className="w-full h-full object-cover" /> {/* Asegúrate de tener esta imagen en tu carpeta de assets */}
+
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img src={imageSrc} alt="Card Background" className="w-full h-full object-cover" />
+        </div>
       </div>
     </div>
   );
 };
 
-export default Body
+export default Body;
+

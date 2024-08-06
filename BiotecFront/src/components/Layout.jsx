@@ -10,6 +10,7 @@ const Layout = ({ children }) => {
     <>
       {!noHeaderRoutes.includes(location.pathname) && <Header />}
       {children}
+      
     </>
   );
 };
