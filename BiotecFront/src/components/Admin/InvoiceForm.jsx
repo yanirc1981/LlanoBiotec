@@ -37,7 +37,7 @@ const InvoiceForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 p-6 max-w-4xl mx-auto bg-white shadow-md rounded">
+    <form onSubmit={handleSubmit} className="space-y-6 p-6 max-w-4xl mx-auto bg-white shadow-md rounded mt-32">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="invoiceType" className="block text-sm font-medium text-gray-700">
@@ -49,7 +49,7 @@ const InvoiceForm = () => {
             name="invoiceType"
             value={formData.invoiceType}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
           />
         </div>
 
@@ -63,7 +63,7 @@ const InvoiceForm = () => {
             name="sendToCostCenters"
             value={formData.sendToCostCenters}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
           />
         </div>
 
@@ -77,7 +77,7 @@ const InvoiceForm = () => {
             name="sendToDian"
             checked={formData.sendToDian}
             onChange={handleChange}
-            className="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            className="mt-1 h-4 w-4 text-orange-500 focus:ring-orange-400 border-gray-300 rounded"
           />
         </div>
 
@@ -91,7 +91,7 @@ const InvoiceForm = () => {
             name="sendToEmail"
             checked={formData.sendToEmail}
             onChange={handleChange}
-            className="mt-1 h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+            className="mt-1 h-4 w-4 text-orange-500 focus:ring-orange-400 border-gray-300 rounded"
           />
         </div>
 
@@ -104,7 +104,7 @@ const InvoiceForm = () => {
             name="sendToCommentsInvoice"
             value={formData.sendToCommentsInvoice}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
           />
         </div>
 
@@ -118,7 +118,7 @@ const InvoiceForm = () => {
             name="sendToUser"
             value={formData.sendToUser}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
           />
         </div>
 
@@ -132,7 +132,7 @@ const InvoiceForm = () => {
             name="orderId"
             value={formData.orderId}
             onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
           />
         </div>
       </div>
@@ -140,7 +140,7 @@ const InvoiceForm = () => {
       <div>
         <button
           type="submit"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400"
         >
           Crear Factura
         </button>

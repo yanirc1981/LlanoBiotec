@@ -69,19 +69,19 @@ const Login = () => {
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+              className="w-full bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-blue-600"
             >
               Ingresar
             </button>
           </div>
         </form>
         <div className="flex items-center justify-center mt-4">
-          <button
+          {/* <button
             onClick={handleGoogleLogin}
             className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
           >
             Nueva Cuenta Admin
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
