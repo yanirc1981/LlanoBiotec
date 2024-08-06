@@ -17,7 +17,7 @@ const TabbedImages = () => {
       case 'tab1':
         return {
           image: LandingPage,
-          text: 'En Innoweb Solutions, creamos landing pages optimizadas y atractivas que capturan la atención de tus visitantes desde el primer momento. Diseñamos páginas con un enfoque claro en la conversión, asegurando que cada elemento esté estratégicamente colocado para maximizar tus resultados. Desde una presentación visual deslumbrante hasta una navegación intuitiva, nuestras landing pages son la herramienta perfecta para impulsar tus campañas de marketing y capturar leads efectivos.',
+          text: 'Asesoría en mejoramiento genérico. *Mejora parámetros productivos(carne y leche) *Busca mejorar la eficiencia productiva *Mejor relación entre conformación y salud mamaria.',
         };
       case 'tab2':
         return {
