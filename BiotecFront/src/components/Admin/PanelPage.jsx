@@ -23,7 +23,7 @@ const PanelPage = () => {
           </ul>
         </li>
         <li>
-          <Link to="/panel/products" className="text-blue-500 hover:underline">Gestionar Productos</Link>
+          <Link to="/panel/products/create" className="text-blue-500 hover:underline">Gestionar Productos</Link>
         </li>
         <li>
           <Link to="/panel/invoices" className="text-blue-500 hover:underline">Gestionar Facturación</Link>
