@@ -14,7 +14,7 @@ import CustomerList from "./components/Admin/CustomerList";
 
 const App = () => {
   const location = useLocation();
-  const hideHeaderRoutes = ['/login', '/register', '/panel'];
+  const hideHeaderRoutes = ['/login', '/register', '/panel', '/panel/products/create'];
 
   return (
     <div>

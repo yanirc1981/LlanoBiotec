@@ -8,10 +8,12 @@ function Body() {
       <section id="about" className="mb-8">
         <h2 className="text-2xl mb-4">Acerca de Nosotros</h2>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, pulvinar facilisis justo mollis, auctor consequat urna.
-        </p>
-        <img src={image} alt="About us" className="w-full h-auto mt-4" />
+        Distribuidor de importantes Casas de Genética Bovina y respaldado por las mejores marcas en implementos, medicamentos hormonales y productos para salud reproductiva bovina        </p>
+        <img src={image} alt="About us" className="w-full h-auto mt-4" /><p className=''>
+        Distribuidor de importantes Casas de Genética Bovina y respaldado por las mejores marcas en implementos, medicamentos hormonales y productos para salud reproductiva bovina        </p>
         <img src={image2} alt="About us" className="w-full h-auto mt-4" />
+
+        
       </section>
 
       <section id="features" className="grid grid-cols-1 md:grid-cols-3 gap-4">
