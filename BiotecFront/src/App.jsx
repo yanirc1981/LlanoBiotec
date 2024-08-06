@@ -12,6 +12,7 @@ import ProductForm from "./components/Admin/ProductForm";
 import InvoiceForm from "./components/Admin/InvoiceForm";
 import CustomerList from "./components/Admin/CustomerList";
 
+
 const App = () => {
   const location = useLocation();
   const hideHeaderRoutes = ['/login', '/register', '/panel', '/panel/products/create'];
