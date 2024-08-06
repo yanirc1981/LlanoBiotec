@@ -1,6 +1,6 @@
 // store.js
 import { createStore, applyMiddleware, compose } from 'redux';
-import { thunk } from 'redux-thunk';
+import thunk from 'redux-thunk';
 import rootReducer from '../Reducer/reducer';
 
 // Combina applyMiddleware y la configuración de Redux DevTools en una sola función usando compose
