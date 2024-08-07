@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { createCustomerSiigo } from "../../Redux/ActionsSiigo/actionsSiigo";
 import { identificationOptions, 
   check_digitOptions, 
@@ -46,7 +47,7 @@ const CreateClient = () => {
   const [personType, setPersonType] = useState("");
   const [idType, setIdType] = useState("");
   const [showCheckDigit, setShowCheckDigit] = useState(false);
-
+  const navigate = useNavigate()
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
@@ -161,10 +162,23 @@ const CreateClient = () => {
   
 
   return (
-    
-    <form onSubmit={handleSubmit} className="space-y-8">
-      <div className="border-b border-gray-900/10 pb-8">
-        <p className="mt-1 ml-2 text-sm leading-6 text-gray-600 mb-6">
+    <div className="w-full h-screen bg-gray-100 flex flex-grow items-center justify-center mb-32 mt-32">
+    <div className="w-full h-full bg-white p-8 rounded-lg shadow-md flex flex-grow items-center justify-center">
+     
+      <form onSubmit={handleSubmit} className="w-full h-full flex flex-grow flex-col space-y-8">
+      <div className="flex items-center justify-between">
+    <h2 className="text-2xl font-bold mb-6">Registrar Administrador</h2>
+    <button
+      onClick={() => navigate("/panel")}
+      className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+    >
+      Volver
+    </button>
+  </div>
+   
+        <div className="border-b border-gray-900/10 pb-8">
+  
+        <p className="mt-1 ml-2 text-2xl leading-6 text-gray-600 mb-6">
           Completa todos los campos para crear un nuevo Cliente en Siigo
         </p>
 
@@ -684,8 +698,11 @@ const CreateClient = () => {
           >
           Crear Cliente
         </button>
+       
       </div>
     </form>
+    </div>
+    </div>
   );
 };
 
