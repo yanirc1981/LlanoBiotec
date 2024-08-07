@@ -11,7 +11,7 @@ import UpdateClient from "./components/Admin/UpdateClient";
 import ProductForm from "./components/Admin/ProductForm";
 import InvoiceForm from "./components/Admin/InvoiceForm";
 import CustomerList from "./components/Admin/CustomerList";
-
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   const location = useLocation();
@@ -23,14 +23,14 @@ const App = () => {
       {!hideHeaderRoutes.includes(location.pathname) && <Header />}
       <Routes>
         <Route path="/" element={<Body />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<PrivateRoute element={<Register />} />}/>
         <Route path="/login" element={<Login />} />
-        <Route path="/panel/*" element={<PanelPage />} />
-        <Route path="/panel/products/create" element={<ProductForm />} />
-        <Route path="/panel/invoices" element={<InvoiceForm />} />
-        <Route path="/panel/clients/create" element={<CreateClient />} />
-        <Route path="/panel/clients/update" element={<UpdateClient />} />
-        <Route path="/panel/clients/list" element={<CustomerList />} />
+        <Route path="/panel/*" element={<PrivateRoute element={<PanelPage />} />} />
+        <Route path="/panel/products/create" element={<PrivateRoute element={<ProductForm />} />} />
+        <Route path="/panel/invoices" element={<PrivateRoute element={<InvoiceForm />} />} />
+        <Route path="/panel/clients/create" element={<PrivateRoute element={<CreateClient />} />} />
+        <Route path="/panel/clients/update" element={<PrivateRoute element={<UpdateClient />} />} />
+        <Route path="/panel/clients/list" element={<PrivateRoute element={<CustomerList />} />} />
       </Routes>
     </div>
   );
