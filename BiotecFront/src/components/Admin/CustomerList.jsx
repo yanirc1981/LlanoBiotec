@@ -40,7 +40,7 @@ const CustomerList = () => {
   };
 
   return (
-    <div>
+    <div className="mt-32 flex items-center justify-center">
       <input
         type="text"
         placeholder="Buscar por identificación"
