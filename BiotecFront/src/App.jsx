@@ -11,7 +11,11 @@ import UpdateClient from "./components/Admin/UpdateClient";
 import ProductForm from "./components/Admin/ProductForm";
 import InvoiceForm from "./components/Admin/InvoiceForm";
 import CustomerList from "./components/Admin/CustomerList";
+import CreateInvoiceForm from './components/Admin/CreateInvoiceForm';
+
 import PrivateRoute from './components/PrivateRoute';
+
+
 
 const App = () => {
   const location = useLocation();
@@ -31,6 +35,7 @@ const App = () => {
         <Route path="/panel/clients/create" element={<PrivateRoute element={<CreateClient />} />} />
         <Route path="/panel/clients/update" element={<PrivateRoute element={<UpdateClient />} />} />
         <Route path="/panel/clients/list" element={<PrivateRoute element={<CustomerList />} />} />
+        <Route path="/panel/invoices/prueba" element={<PrivateRoute element={<CreateInvoiceForm />} />} />
       </Routes>
     </div>
   );

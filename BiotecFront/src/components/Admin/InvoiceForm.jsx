@@ -1,45 +1,35 @@
-import  { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { postGenerateInvoice } from '../../Redux/ActionsSiigo/actionsSiigo'; 
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {useNavigate} from 'react-router-dom'
+import { getCustomerDetailsByIdentification } from '../../Redux/ActionsSiigo/actionsSiigo'
+import CreateClient from './CreateClient'
+
 
 const InvoiceForm = () => {
-  const [formData, setFormData] = useState({
-    invoiceType: '',
-    sendToCostCenters: '',
-    sendToDian: false,
-    sendToEmail: false,
-    sendToCommentsInvoice: '',
-    sendToUser: '',
-    orderId: '',
-    // Otros campos necesarios
-  });
-
+  const navigate = useNavigate()
+  const [identification, setIdentification] = useState('');
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
-      [name]: type === 'checkbox' ? checked : value,
-    });
+  const customerDetails = useSelector((state) => state.customerDetails);
+  const { customer, loading, error } = customerDetails;
+  const [showCreateCustomerForm, setShowCreateCustomerForm] = useState(false);
+
+  const checkCustomer = (identification) => {
+    dispatch(getCustomerDetailsByIdentification(identification));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const headers = { /* Aquí puedes añadir headers si es necesario */ };
-    const response = await dispatch(postGenerateInvoice(formData, headers));
-    if (response.success) {
-      alert('Factura creada exitosamente');
-      // Puedes hacer algo más si lo deseas, como redirigir al usuario
-    } else {
-      alert('Error: ' + response.errorMessage);
+  useEffect(() => {
+    if (customer && Object.keys(customer).length > 0) {
+      console.log('Cliente encontrado:', customer);
+      setShowCreateCustomerForm(false);
+    } else if (error) {
+      console.log('Cliente no encontrado, mostrar formulario de creación de cliente');
+      setShowCreateCustomerForm(true);
     }
-  };
+  }, [customer, error]);
 
   return (
-    <form className="mt-32 max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
-      <div className="flex items-center justify-between">
+
+    <div className="flex items-center justify-between">
     <h2 className="text-2xl font-bold mb-6">Facturación</h2>
     <button
       onClick={() => navigate("/panel")}
@@ -47,118 +37,40 @@ const InvoiceForm = () => {
     >
       Volver
     </button>
-  </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="invoiceType" className="block text-sm font-medium text-gray-700">
-            Tipo de Factura
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <div className="mb-4">
+          <label htmlFor="identification" className="block text-sm font-medium text-gray-700 mb-2">
+            Identificación
           </label>
           <input
+            id="identification"
             type="text"
-            id="invoiceType"
-            name="invoiceType"
-            value={formData.invoiceType}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
+            placeholder="Ingrese identificación"
+            value={identification}
+            onChange={(e) => setIdentification(e.target.value)}
+            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
-
-        <div>
-          <label htmlFor="sendToCostCenters" className="block text-sm font-medium text-gray-700">
-            Centro de Costo
-          </label>
-          <input
-            type="text"
-            id="sendToCostCenters"
-            name="sendToCostCenters"
-            value={formData.sendToCostCenters}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
-          />
-        </div>
-
-        <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Enviar a DIAN
-          </label>
-          <input
-            type="checkbox"
-            id="sendToDian"
-            name="sendToDian"
-            checked={formData.sendToDian}
-            onChange={handleChange}
-            className="mt-1 h-4 w-4 text-orange-500 focus:ring-orange-400 border-gray-300 rounded"
-          />
-        </div>
-
-        <div className="md:col-span-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Enviar por Email
-          </label>
-          <input
-            type="checkbox"
-            id="sendToEmail"
-            name="sendToEmail"
-            checked={formData.sendToEmail}
-            onChange={handleChange}
-            className="mt-1 h-4 w-4 text-orange-500 focus:ring-orange-400 border-gray-300 rounded"
-          />
-        </div>
-
-        <div className="md:col-span-2">
-          <label htmlFor="sendToCommentsInvoice" className="block text-sm font-medium text-gray-700">
-            Comentarios
-          </label>
-          <textarea
-            id="sendToCommentsInvoice"
-            name="sendToCommentsInvoice"
-            value={formData.sendToCommentsInvoice}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
-          />
-        </div>
-
-        <div className="md:col-span-2">
-          <label htmlFor="sendToUser" className="block text-sm font-medium text-gray-700">
-            Vendedor
-          </label>
-          <input
-            type="text"
-            id="sendToUser"
-            name="sendToUser"
-            value={formData.sendToUser}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
-          />
-        </div>
-
-        <div className="md:col-span-2">
-          <label htmlFor="orderId" className="block text-sm font-medium text-gray-700">
-            ID de la Orden
-          </label>
-          <input
-            type="text"
-            id="orderId"
-            name="orderId"
-            value={formData.orderId}
-            onChange={handleChange}
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-orange-400 focus:ring-orange-400 sm:text-sm"
-          />
-        </div>
-      </div>
-
-      <div>
         <button
-          type="submit"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-orange-500 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-400"
+          onClick={() => checkCustomer(identification)}
+          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
-          Crear Factura
+          Verificar Cliente
         </button>
+        {loading && <p className="mt-4 text-gray-500">Cargando...</p>}
+        {error && <p className="mt-4 text-red-500">Error: {error}</p>}
+        {customer && Object.keys(customer).length > 0 && (
+          <p className="mt-4 text-green-500">Cliente encontrado: {customer.name}</p>
+        )}
+        {showCreateCustomerForm && <CreateClient />}
       </div>
-    </form>
+    </div>
   );
 };
 
 export default InvoiceForm;
 
-  
+
+
+
+

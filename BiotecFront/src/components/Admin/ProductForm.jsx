@@ -1,31 +1,34 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { createProductSiigo, getAccountGroup, getTaxes } from '../../Redux/ActionsSiigo/actionsSiigo';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createProductSiigo,
+  getAccountGroup,
+  getTaxes,
+} from "../../Redux/ActionsSiigo/actionsSiigo";
+import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types, no-unused-vars
 const ProductForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
-    code: '',
-    name: '',
-    account_group: '',
+    code: "",
+    name: "",
+    account_group: "",
     stockControl: false,
-    tax_classification: 'Taxed',
+    tax_classification: "Taxed",
     taxIncluded: false,
     taxConsumptionValue: 0,
-    idTax: '',
-    rate: '',
-    currencyCode: 'COP',
+    idTax: "",
+    rate: "",
+    currencyCode: "COP",
     position: 1,
     price: 0,
-    unit: '94',
-    unit_label: 'unidad',
-    description: ''
+    unit: "94",
+    unit_label: "unidad",
+    description: "",
   });
 
   const dispatch = useDispatch();
-  const accountGroups = useSelector(state => state.accounts);
-  const taxes = useSelector(state => state.taxes);
+  const { accounts, taxes, loading, error } = useSelector((state) => state);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +40,7 @@ const ProductForm = ({ onSubmit }) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -62,28 +65,33 @@ const ProductForm = ({ onSubmit }) => {
       description: formData.description,
     };
 
-    console.log('Datos a enviar:', JSON.stringify(payload, null, 2));
+    console.log("Datos a enviar:", JSON.stringify(payload, null, 2));
     const response = await dispatch(createProductSiigo(payload));
 
     if (response.success) {
-      alert('Producto creado correctamente');
+      alert("Producto creado correctamente");
     } else {
       alert(`Error al crear el producto: ${response.errorMessage}`);
     }
   };
 
   return (
-    <form className="mt-32 max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
-      <div className="flex items-center justify-between">
-    <h2 className="text-2xl font-bold mb-6">Crear Producto</h2>
-    <button
-      onClick={() => navigate("/panel")}
-      className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+    <form
+      className="mt-32 max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg"
+      onSubmit={handleSubmit}
     >
-      Volver
-    </button>
-  </div>
-      
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold mb-6">Crear Producto</h2>
+        <button
+          onClick={() => navigate("/panel")}
+          className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+        >
+          Volver
+        </button>
+      </div>
+      {loading && <p>Cargando...</p>}
+      {error && <p>Error: {error}</p>}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-gray-700">Código del Producto</label>
@@ -118,8 +126,10 @@ const ProductForm = ({ onSubmit }) => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
             required
           >
-            <option value="" disabled>Selecciona un grupo de cuentas</option>
-            {accountGroups.map(group => (
+            <option value="" disabled>
+              Selecciona un grupo de cuentas
+            </option>
+            {accounts.map((group) => (
               <option key={group.id} value={group.id}>
                 {group.name}
               </option>
@@ -153,7 +163,9 @@ const ProductForm = ({ onSubmit }) => {
         </div>
 
         <div>
-          <label className="block text-gray-700">Clasificación de Impuesto</label>
+          <label className="block text-gray-700">
+            Clasificación de Impuesto
+          </label>
           <select
             name="tax_classification"
             value={formData.tax_classification}
@@ -178,7 +190,9 @@ const ProductForm = ({ onSubmit }) => {
         </div>
 
         <div>
-          <label className="block text-gray-700">Valor del Impuesto al Consumo</label>
+          <label className="block text-gray-700">
+            Valor del Impuesto al Consumo
+          </label>
           <input
             type="number"
             name="taxConsumptionValue"
@@ -197,17 +211,19 @@ const ProductForm = ({ onSubmit }) => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
             required
           >
-            <option value="" disabled>Selecciona un impuesto</option>
-            {taxes.map(tax => (
+            <option value="" disabled>
+              Selecciona un impuesto
+            </option>
+            {taxes.map((tax) => (
               <option key={tax.id} value={tax.id}>
-                {tax.name}
+                {tax.name} ({tax.percentage}%)
               </option>
             ))}
           </select>
         </div>
 
         <div>
-          <label className="block text-gray-700">Tasa</label>
+          <label className="block text-gray-700">Tarifa</label>
           <input
             type="number"
             name="rate"
@@ -225,7 +241,6 @@ const ProductForm = ({ onSubmit }) => {
             value={formData.currencyCode}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            required
           />
         </div>
 
@@ -284,7 +299,10 @@ const ProductForm = ({ onSubmit }) => {
         </div>
       </div>
 
-      <button type="submit" className="w-full mt-6 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600">
+      <button
+        type="submit"
+        className="w-full mt-6 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600"
+      >
         Crear Producto
       </button>
     </form>
@@ -292,6 +310,3 @@ const ProductForm = ({ onSubmit }) => {
 };
 
 export default ProductForm;
-
-
-  
