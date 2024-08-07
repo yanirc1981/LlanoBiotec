@@ -35,23 +35,19 @@ function Body() {
       <section>
   <div className="py-10">
     <div className="flex flex-wrap justify-center mb-6">
-      <div className="hidden lg:block h-1 w-64 mr-10 bg-customGreen"></div>
-      <h1 green={true} styleAdd="py-2">
-        Conocenos
-      </h1>
-      <div className="h-1 w-64 lg:ml-10 bg-customGreen"></div>
+    <h1 className="text-4xl font-bold text-customGreen">
+    Conocénos
+  </h1>
     </div>
 
     <div className="lg:flex lg:flex-col lg:items-center">
       <div className="text-center lg:w-3/5 lg:mx-auto mb-6 px-5">
-        <p>
-          Somos una empresa dedicada a la producción de leche con los mejores estándares de calidad. También somos educación tecnología, turismo y producción para la evolución de la región llanera y de Restrepo Meta. Con LLanoBioTec tendrás asegurada una calidad inigualable, nos destacamos por el manejo de buenas prácticas donde se hará la implementación de varios procesos con tecnología de ultima calidad en el mercado.
-          Buen ganado, buena leche y buena carne, no busques más.
-        </p>
-        <p>
-          Somos una empresa dedicada a la producción de leche con los mejores estándares de calidad. También somos educación tecnología, turismo y producción para la evolución de la región llanera y de Restrepo Meta.
-          Villavicencio, Meta, Colombia · Cumaralito, Meta, Colombia · Guacavia, Cundinamarca, Colombia · Parate Paratebueno, Arauca, Colombia · Paratebueno, Colombia · Cumaral, Meta, Colombia · Restrepo, Meta, Colombia
-        </p>
+      <p className="text-xl lg:text-2xl leading-relaxed">
+      Somos una empresa dedicada a la producción de leche con los mejores estándares de calidad. También somos educación tecnología, turismo y producción para la evolución de la región llanera y de Restrepo Meta. Con LLanoBioTec tendrás asegurada una calidad inigualable, nos destacamos por el manejo de buenas prácticas donde se hará la implementación de varios procesos con tecnología de ultima calidad en el mercado. Buen ganado, buena leche y buena carne, no busques más.
+    </p>
+    <p className="text-xl lg:text-2xl leading-relaxed mt-4">
+      Villavicencio, Meta, Colombia · Cumaralito, Meta, Colombia · Guacavia, Cundinamarca, Colombia · Parate Paratebueno, Arauca, Colombia · Paratebueno, Colombia · Cumaral, Meta, Colombia · Restrepo, Meta, Colombia
+    </p>
       </div>
 
       <div className="lg:flex lg:justify-center lg:w-4/5 lg:mx-auto">
