@@ -27,14 +27,13 @@ module.exports = async (req, res) => {
       account_group: accountGroupNumber,
       type: originalData.type || 'Product',
       stock_control: stockControl,
-      active: originalData.active || true,
       tax_classification: originalData.tax_classification || 'Taxed',
       tax_included: taxIncluded,
       tax_consumption_value: taxConsumptionValue || 0,
       taxes: [
         {
           id: taxesId,
-          rate: originalData.rate || '', // Omitir milliliters si no es necesario
+          rate: originalData.rate || '', 
         },
       ],
       prices: [
@@ -48,16 +47,10 @@ module.exports = async (req, res) => {
           ],
         },
       ],
-      unit: originalData.unit || '',
-      unit_label: originalData.unit_label || 'unidad',
-      reference: originalData.reference || '',
-      description: originalData.description || '',
-      additional_fields: {
-        barcode: originalData.barcode || '',
-        brand: originalData.brand || '',
-        tariff: originalData.tariff || '',
-        model: originalData.model || '',
-      },
+      unit: originalData.unit || '', ///reports/2000/5515?TabID=1753&pTabID=1446.
+      unit_label: originalData.unit_label || 'unidad', //litros ? string
+      description: originalData.description || '', //se imprime
+     
     };
 
     // Guardar el producto en la base de datos local
@@ -74,12 +67,10 @@ module.exports = async (req, res) => {
       prices_price_list_position: positionNumber,
       prices_price_list_value: valueNumber,
       unit: originalData.unit || '',
+      unit_label: originalData.unit_label || '',
       description: originalData.description || '',
-      tariff: originalData.tariff || '',
-      model: originalData.model || '',
-      barcode: originalData.barcode || '',
-      brand: originalData.brand || '',
-      reference: originalData.reference || '',
+      
+      
     });
 
     // Enviar el producto a la API de Siigo

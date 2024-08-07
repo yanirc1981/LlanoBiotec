@@ -1,4 +1,4 @@
-import React from 'react';
+
 import image from '../assets/banner.png';
 import image2 from '../../public/llanoBaner.png'
 import TabbedImages from './TabbedImages';
