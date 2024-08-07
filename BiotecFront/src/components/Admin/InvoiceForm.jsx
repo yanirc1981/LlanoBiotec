@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {useNavigate} from 'react-router-dom'
 import { getCustomerDetailsByIdentification } from '../../Redux/ActionsSiigo/actionsSiigo'
 import CreateClient from './CreateClient'
 
 
 const InvoiceForm = () => {
-  const navigate = useNavigate()
+  
   const [identification, setIdentification] = useState('');
   const dispatch = useDispatch();
   const customerDetails = useSelector((state) => state.customerDetails);
@@ -29,16 +28,10 @@ const InvoiceForm = () => {
 
   return (
 
-    <div className="flex items-center justify-between">
-    <h2 className="text-2xl font-bold mb-6">Facturación</h2>
-    <button
-      onClick={() => navigate("/panel")}
-      className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
-    >
-      Volver
-    </button>
-      <div className="bg-white p-6 rounded-lg shadow-lg">
-        <div className="mb-4">
+    <div className="mt-32 flex items-center justify-center">
+      <div className="bg-white p-6 items-center rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-6">Facturación</h2>
+        <div className="mb-4 items-center">
           <label htmlFor="identification" className="block text-sm font-medium text-gray-700 mb-2">
             Identificación
           </label>

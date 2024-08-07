@@ -6,7 +6,7 @@ import {store} from '../src/Redux/Store/store.jsx'// Asegúrate de que la ruta s
 import App from './App.jsx';
 import './index.css';
 import WhatsAppButton from './components/WhatsAppButton.jsx';
-import Footer from './components/Footer.jsx'
+
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -15,7 +15,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Router>
       <App />
       <WhatsAppButton/>
-      <Footer/>
     </Router>
     </Provider>
   </React.StrictMode>
