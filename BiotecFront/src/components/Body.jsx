@@ -33,19 +33,19 @@ function Body() {
       </section>
 
       <section>
-  <div className="py-10">
-    <div className="flex flex-wrap justify-center mb-6">
-    <h1 className="text-4xl font-bold text-customGreen">
+  <div className="py-10 ">
+    <div className="flex flex-wrap justify-center mb-6 ">
+    <h6 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-gray-700 mb-3 p-6 text-center mt-16">
     Conocénos
-  </h1>
+  </h6>
     </div>
 
     <div className="lg:flex lg:flex-col lg:items-center">
       <div className="text-center lg:w-3/5 lg:mx-auto mb-6 px-5">
-      <p className="text-xl lg:text-2xl leading-relaxed">
+      <p className="text-xl lg:text-2xl leading-relaxed  text-gray-700">
       Somos una empresa dedicada a la producción de leche con los mejores estándares de calidad. También somos educación tecnología, turismo y producción para la evolución de la región llanera y de Restrepo Meta. Con LLanoBioTec tendrás asegurada una calidad inigualable, nos destacamos por el manejo de buenas prácticas donde se hará la implementación de varios procesos con tecnología de ultima calidad en el mercado. Buen ganado, buena leche y buena carne, no busques más.
     </p>
-    <p className="text-xl lg:text-2xl leading-relaxed mt-4">
+    <p className="text-xl lg:text-2xl leading-relaxed mt-4 text-gray-700">
       Villavicencio, Meta, Colombia · Cumaralito, Meta, Colombia · Guacavia, Cundinamarca, Colombia · Parate Paratebueno, Arauca, Colombia · Paratebueno, Colombia · Cumaral, Meta, Colombia · Restrepo, Meta, Colombia
     </p>
       </div>
