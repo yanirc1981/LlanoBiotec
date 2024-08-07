@@ -33,6 +33,8 @@ import {
   POST_GENERATE_INVOICE,
   PUT_CUSTOMER_SIIGO,
   PUT_PRODUCT_SIIGO,
+  SET_LOADING,
+  SET_ERROR,
   DELETE_CUSTOMER_SIIGO
 } from '../ActionsSiigo/actions-types-siigo';
 
@@ -50,6 +52,9 @@ const initialState = {
   paymentsType: [],
   invoiceId: {},
   customer: {},
+  loading: false,
+  error: null,
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -110,6 +115,17 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         taxes: action.payload,
+      };
+
+      case SET_LOADING:
+      return {
+        ...state,
+        loading: action.payload,
+      };
+    case SET_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
       case GET_COST_CENTER_SIIGO:
         return {

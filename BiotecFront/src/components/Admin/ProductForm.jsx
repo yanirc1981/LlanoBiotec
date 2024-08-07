@@ -1,13 +1,14 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createProductSiigo } from '../../Redux/ActionsSiigo/actionsSiigo';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createProductSiigo, getAccountGroup, getTaxes } from '../../Redux/ActionsSiigo/actionsSiigo';
+
 // eslint-disable-next-line react/prop-types, no-unused-vars
 const ProductForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
     code: '',
     name: '',
-    account: '',
+    account_group: '',
     stockControl: false,
     tax_classification: 'Taxed',
     taxIncluded: false,
@@ -17,14 +18,19 @@ const ProductForm = ({ onSubmit }) => {
     currencyCode: 'COP',
     position: 1,
     price: 0,
-    unit: '',
+    unit: '94',
     unit_label: 'unidad',
-    description: '',
-    tariff: '',
-    model: ''
+    description: ''
   });
 
   const dispatch = useDispatch();
+  const accountGroups = useSelector(state => state.accounts);
+  const taxes = useSelector(state => state.taxes);
+
+  useEffect(() => {
+    dispatch(getAccountGroup());
+    dispatch(getTaxes());
+  }, [dispatch]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -37,11 +43,10 @@ const ProductForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Crear el payload según la estructura esperada por la API de Siigo
     const payload = {
       code: formData.code,
       name: formData.name,
-      account: formData.account,
+      account_group: formData.account_group,
       stockControl: formData.stockControl,
       tax_classification: formData.tax_classification,
       taxIncluded: formData.taxIncluded,
@@ -54,11 +59,8 @@ const ProductForm = ({ onSubmit }) => {
       unit: formData.unit,
       unit_label: formData.unit_label,
       description: formData.description,
-      tariff: formData.tariff,
-      model: formData.model
     };
 
-    
     console.log('Datos a enviar:', JSON.stringify(payload, null, 2));
     const response = await dispatch(createProductSiigo(payload));
 
@@ -100,14 +102,20 @@ const ProductForm = ({ onSubmit }) => {
 
         <div>
           <label className="block text-gray-700">Grupo de Cuentas</label>
-          <input
-            type="number"
-            name="account"
-            value={formData.account}
+          <select
+            name="account_group"
+            value={formData.account_group}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
             required
-          />
+          >
+            <option value="" disabled>Selecciona un grupo de cuentas</option>
+            {accountGroups.map(group => (
+              <option key={group.id} value={group.id}>
+                {group.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -134,7 +142,6 @@ const ProductForm = ({ onSubmit }) => {
           />
           <label className="text-gray-700">Control de Inventario</label>
         </div>
-
 
         <div>
           <label className="block text-gray-700">Clasificación de Impuesto</label>
@@ -174,14 +181,22 @@ const ProductForm = ({ onSubmit }) => {
 
         <div>
           <label className="block text-gray-700">ID del Impuesto</label>
-          <input
-            type="number"
+          <select
             name="idTax"
             value={formData.idTax}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
+            required
+          >
+            <option value="" disabled>Selecciona un impuesto</option>
+            {taxes.map(tax => (
+              <option key={tax.id} value={tax.id}>
+                {tax.name}
+              </option>
+            ))}
+          </select>
         </div>
+
         <div>
           <label className="block text-gray-700">Tasa</label>
           <input
@@ -201,11 +216,12 @@ const ProductForm = ({ onSubmit }) => {
             value={formData.currencyCode}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
+            required
           />
         </div>
 
         <div>
-          <label className="block text-gray-700">Posición de Lista de Precios</label>
+          <label className="block text-gray-700">Posición</label>
           <input
             type="number"
             name="position"
@@ -216,7 +232,7 @@ const ProductForm = ({ onSubmit }) => {
         </div>
 
         <div>
-          <label className="block text-gray-700">Valor de Lista de Precios</label>
+          <label className="block text-gray-700">Precio</label>
           <input
             type="number"
             name="price"
@@ -248,18 +264,7 @@ const ProductForm = ({ onSubmit }) => {
           />
         </div>
 
-        <div>
-          <label className="block text-gray-700">Referencia</label>
-          <input
-            type="text"
-            name="reference"
-            value={formData.reference}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
-        </div>
-
-        <div className="md:col-span-2">
+        <div className="col-span-2">
           <label className="block text-gray-700">Descripción</label>
           <textarea
             name="description"
@@ -267,27 +272,6 @@ const ProductForm = ({ onSubmit }) => {
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
           ></textarea>
-        </div>
-        <div>
-          <label className="block text-gray-700">Arancel</label>
-          <input
-            type="text"
-            name="tariff"
-            value={formData.tariff}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
-        </div>
-
-        <div>
-          <label className="block text-gray-700">Modelo</label>
-          <input
-            type="text"
-            name="model"
-            value={formData.model}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
         </div>
       </div>
 

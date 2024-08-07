@@ -1,4 +1,4 @@
-import React from 'react';
+
 import image from '../assets/banner.png';
 
 import TabbedImages from './TabbedImages';
