@@ -1,7 +1,5 @@
-import { Link, Route, Routes } from 'react-router-dom';
-import CreateClient from './CreateClient';
-import UpdateClient from './UpdateClient';
-import DeleteClient from './CustomerList';
+import { Link } from 'react-router-dom';
+
 
 const PanelPage = () => {
   return (

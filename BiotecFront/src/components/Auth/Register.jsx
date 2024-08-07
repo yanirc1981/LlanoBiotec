@@ -49,21 +49,19 @@ const Register = () => {
         is_admin: true
       });
       console.log('Admin registered:', response.data);
-      navigate('/login'); // Redirige al usuario a la página de inicio de sesión
+      navigate('/panel'); // Redirige al usuario a la página de inicio de sesión
     } catch (error) {
       setError('Error registering admin');
       console.error('Error registering admin:', error);
     }
   };
 
-  const handleLoginRedirect = () => {
-    navigate('/login'); // Redirige al usuario a la página de login
-  };
+ 
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 mt-8">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Regístrate</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Regístrar Administrador</h2>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -140,14 +138,7 @@ const Register = () => {
             </button>
           </div>
         </form>
-        <div className="flex items-center justify-center mt-4">
-          <button
-            onClick={handleLoginRedirect}
-            className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
-          >
-            Ya tengo Cuenta
-          </button>
-        </div>
+       
       </div>
     </div>
   );
