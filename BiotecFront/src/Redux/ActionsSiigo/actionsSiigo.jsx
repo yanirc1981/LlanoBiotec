@@ -35,7 +35,11 @@ import {
   POST_GENERATE_INVOICE,
   PUT_CUSTOMER_SIIGO,
   PUT_PRODUCT_SIIGO,
-  DELETE_CUSTOMER_SIIGO
+  DELETE_CUSTOMER_SIIGO,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT
 } from './actions-types-siigo';
 
 //const BASE_URL = 'https://lacteos7maravillas.onrender.com';
@@ -429,4 +433,30 @@ export const cleanCustomerDetails = () => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const login = (email, password) => async (dispatch) => {
+  dispatch({ type: LOGIN_REQUEST });
+
+  try {
+    const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
+    const { token } = response.data;
+
+    localStorage.setItem('token', token);
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: { email, token }
+    });
+  } catch (error) {
+    dispatch({
+      type: LOGIN_FAILURE,
+      payload: error.response ? error.response.data.message : error.message
+    });
+  }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('token');
+  dispatch({ type: LOGOUT });
 };

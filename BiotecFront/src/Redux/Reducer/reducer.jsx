@@ -35,7 +35,11 @@ import {
   PUT_PRODUCT_SIIGO,
   SET_LOADING,
   SET_ERROR,
-  DELETE_CUSTOMER_SIIGO
+  DELETE_CUSTOMER_SIIGO,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT
 } from '../ActionsSiigo/actions-types-siigo';
 
 const initialState = {
@@ -54,6 +58,9 @@ const initialState = {
   customer: {},
   loading: false,
   error: null,
+  email: null,
+  token: null,
+  isAuthenticated: false
 
 };
 
@@ -238,6 +245,33 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         customer: {},
       };
+      case LOGIN_REQUEST:
+        return {
+          ...state,
+          loading: true,
+          error: null
+        };
+      case LOGIN_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          email: action.payload.email,
+          token: action.payload.token,
+          isAuthenticated: true
+        };
+      case LOGIN_FAILURE:
+        return {
+          ...state,
+          loading: false,
+          error: action.payload
+        };
+      case LOGOUT:
+        return {
+          ...state,
+          email: null,
+          token: null,
+          isAuthenticated: false
+        };
     default:
       return state;
   }

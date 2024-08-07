@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+// Navbar.jsx
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../Redux/ActionsSiigo/actionsSiigo';
 import logo from '../assets/logoNegro.png';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.isAuthenticated); // Ajuste aquí si es necesario
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const navigate = useNavigate()
   const handleLogoClick = () => {
     window.location.href = '/';
   };
@@ -14,8 +19,8 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    // Lógica de logout aquí
-    setIsAuthenticated(false);
+    dispatch(logout())
+    navigate('/');
   };
 
   return (
@@ -52,20 +57,21 @@ const Navbar = () => {
             </button>
             {isMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-50 p-2 opacity-95">
-                <a
-                  href="/login"
-                  className="block px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white"
-                >
-                  Login
-                </a>
-                {isAuthenticated && (
+                {!isAuthenticated ? (
+                  <a
+                    href="/login"
+                    className="block px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white"
+                  >
+                    Login
+                  </a>
+                ) : (
                   <>
-                    <a
+                    {/* <a
                       href="/panel"
                       className="block px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white"
                     >
                       Administración
-                    </a>
+                    </a> */}
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white"
@@ -84,6 +90,7 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
 
 
 
