@@ -2,7 +2,7 @@ import React from 'react';
 import logo1 from '../assets/restrepo.png'; // Asegúrate de tener estas imágenes en tu carpeta de assets
 import logo2 from '../assets/sena.png';
 import logo3 from '../assets/fondoEmprender.png';
-import { FaInstagram, FaEnvelope } from 'react-icons/fa';
+import { FaInstagram, FaEnvelope, FaFacebook } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -22,7 +22,10 @@ const Footer = () => {
           <a href="https://www.instagram.com/llanobiotec_sas?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer">
             <FaInstagram className="h-8 w-8 text-white" />
           </a>
-          <a href="mailto:contact@example.com">
+          <a href="https://www.facebook.com/Llanobiotecsas" target="_blank" rel="noopener noreferrer">
+            <FaFacebook className="h-8 w-8 text-white" />
+          </a>
+          <a href="mailto:llanobiotecsas@gmail.com">
             <FaEnvelope className="h-8 w-8 text-white" />
           </a>
         </div>
