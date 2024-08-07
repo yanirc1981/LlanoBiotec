@@ -2,18 +2,20 @@ import React from 'react';
 import image from '../assets/banner.png';
 import image2 from '../../public/llanoBaner.png'
 import TabbedImages from './TabbedImages';
-
+import FlipCards from './FlipCards';
 function Body() {
   return (
     <main className="p-16">
  <section id="about" className="mb-8">
-  <p className="text-4xl font-bold text-gray-600 mb-6">
-    Distribuidor de importantes Casas de Genética Bovina y respaldado por las mejores marcas en implementos, medicamentos hormonales y productos para salud reproductiva bovina
-  </p>
+ <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-gray-700 mb-3 bg-orange-400 p-8 text-center mt-16">
+    Distribuidor de importantes Casas de Genética Bovina y respaldado por las mejores marcas en implementos, medicamentos hormonales y productos para salud reproductiva bovina.
+  </h1>
   <img src={image} alt="About us" className="w-full h-auto mb-24 mt-24 rounded-lg" />
-  <p className="text-4xl font-bold text-gray-600 mt-6 mb-4">
-    Distribuidor de importantes Casas de Genética Bovina y respaldado por las mejores marcas en implementos, medicamentos hormonales y productos para salud reproductiva bovina
-  </p>
+  
+  <div>
+  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-gray-700 mb-3 bg-orange-400 p-8 text-center mt-16">Nivel Productivo y Reproductivo a Máxima Capacidad.</h1>
+  <FlipCards/>
+  </div>
   {/* <img src={image2} alt="About us" className="w-full h-auto mt-4" /> */}
   <TabbedImages />
 </section>

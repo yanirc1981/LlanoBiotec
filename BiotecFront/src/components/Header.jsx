@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import image1 from '../../public/imgLLano.png';
+import image1 from '../assets/vaca3.jpg';
 //import image2 from '../../public/llanoBaner.png';
 
 const Header = () => {

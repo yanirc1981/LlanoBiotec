@@ -4,7 +4,6 @@ import gyr from '../assets/gyr.png';
 import jersey from '../assets/jersey.png';
 import brahman from '../assets/brahman.png';
 
-
 const TabbedImages = () => {
   const [activeTab, setActiveTab] = useState('tab1');
 
@@ -34,7 +33,6 @@ const TabbedImages = () => {
           image: brahman,
           text: 'También somos educación tecnología, turismo y producción para la evolución de la región llanera y de Restrepo Meta..',
         };
-    
       default:
         return {
           image: guzerat,
@@ -46,8 +44,8 @@ const TabbedImages = () => {
   const { image, text } = getImageAndText(activeTab);
 
   return (
-    <div className="flex flex-col items-center mt-4 mx-6 p-16">
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-8 mb-4 p-3">
+    <div className="flex flex-col items-center mt-4  p-16 bg-opacity-50 bg-gray-500 rounded-lg">
+      <div className="flex justify-center mb-4 p-4 gap-6">
         <button
           className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 ${activeTab === 'tab1' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab1')}
@@ -55,13 +53,13 @@ const TabbedImages = () => {
           Asesoría
         </button>
         <button
-          className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 ${activeTab === 'tab2' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 mx-2 ${activeTab === 'tab2' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab2')}
         >
           Distribuidor
         </button>
         <button
-          className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 ${activeTab === 'tab3' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 mx-2 ${activeTab === 'tab3' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab3')}
         >
           Calidad
@@ -73,12 +71,12 @@ const TabbedImages = () => {
           Educación
         </button>
       </div>
-      <div className="w-full flex flex-col items-center space-y-4 md:space-y-0 md:flex-row md:space-x-4 lg:space-x-0">
-        <div className="md:w-2/3 flex justify-center">
+      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
+        <div className="md:w-1/2  flex justify-center ">
           <img src={image} alt="Tab Image" className="w-80 h-auto max-w-2xl lg:w-120 rounded-lg" />
         </div>
-        <div className="md:w-3/5 flex flex-col items-center "> 
-          <p className="text-lg lg:text-2xl font-bold text-gray-600 ml-2">{text}</p>
+        <div className="md:w-1/2 lg:w-1/3 flex flex-col items-center">
+          <p className="text-lg lg:text-2xl font-bold text-gray-700 ml-2 text-center">{text}</p>
         </div>
       </div>
     </div>
@@ -86,3 +84,4 @@ const TabbedImages = () => {
 };
 
 export default TabbedImages;
+
