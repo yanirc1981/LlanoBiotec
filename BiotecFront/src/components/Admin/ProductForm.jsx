@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createProductSiigo, getAccountGroup, getTaxes } from '../../Redux/ActionsSiigo/actionsSiigo';
-
+import { useNavigate } from 'react-router-dom';
 // eslint-disable-next-line react/prop-types, no-unused-vars
 const ProductForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -26,6 +26,7 @@ const ProductForm = ({ onSubmit }) => {
   const dispatch = useDispatch();
   const accountGroups = useSelector(state => state.accounts);
   const taxes = useSelector(state => state.taxes);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAccountGroup());
@@ -73,7 +74,15 @@ const ProductForm = ({ onSubmit }) => {
 
   return (
     <form className="mt-32 max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
-      <h2 className="text-2xl font-bold mb-6">Crear Producto</h2>
+      <div className="flex items-center justify-between">
+    <h2 className="text-2xl font-bold mb-6">Crear Producto</h2>
+    <button
+      onClick={() => navigate("/panel")}
+      className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+    >
+      Volver
+    </button>
+  </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>

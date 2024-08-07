@@ -61,7 +61,15 @@ const Register = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 mt-8">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Regístrar Administrador</h2>
+      <div className="flex items-center justify-between">
+    <h2 className="text-2xl font-bold mb-6">Registrar Administrador</h2>
+    <button
+      onClick={() => navigate("/panel")}
+      className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+    >
+      Volver
+    </button>
+  </div>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { postGenerateInvoice } from '../../Redux/ActionsSiigo/actionsSiigo'; 
+import { useNavigate } from 'react-router-dom';
 
 const InvoiceForm = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const InvoiceForm = () => {
   });
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -37,7 +38,16 @@ const InvoiceForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 p-6 max-w-4xl mx-auto bg-white shadow-md rounded mt-32">
+    <form className="mt-32 max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
+      <div className="flex items-center justify-between">
+    <h2 className="text-2xl font-bold mb-6">Facturación</h2>
+    <button
+      onClick={() => navigate("/panel")}
+      className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+    >
+      Volver
+    </button>
+  </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label htmlFor="invoiceType" className="block text-sm font-medium text-gray-700">
