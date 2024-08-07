@@ -11,6 +11,7 @@ import UpdateClient from "./components/Admin/UpdateClient";
 import ProductForm from "./components/Admin/ProductForm";
 import InvoiceForm from "./components/Admin/InvoiceForm";
 import CustomerList from "./components/Admin/CustomerList";
+import CreateInvoiceForm from './components/Admin/CreateInvoiceForm';
 
 
 const App = () => {
@@ -28,9 +29,11 @@ const App = () => {
         <Route path="/panel/*" element={<PanelPage />} />
         <Route path="/panel/products/create" element={<ProductForm />} />
         <Route path="/panel/invoices" element={<InvoiceForm />} />
+        <Route path="/panel/invoices/prueba" element={<CreateInvoiceForm />} />
         <Route path="/panel/clients/create" element={<CreateClient />} />
         <Route path="/panel/clients/update" element={<UpdateClient />} />
         <Route path="/panel/clients/list" element={<CustomerList />} />
+
       </Routes>
     </div>
   );

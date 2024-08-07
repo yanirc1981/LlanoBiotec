@@ -39,7 +39,6 @@ import {
 } from '../ActionsSiigo/actions-types-siigo';
 
 const initialState = {
-
   customers: [],
   accounts: [],
   taxes: [],
@@ -51,15 +50,17 @@ const initialState = {
   usersSiigo: [],
   paymentsType: [],
   invoiceId: {},
-  customer: {},
+  customerDetails: {
+    customer: {},
+    loading: false,
+    error: null,
+  },
   loading: false,
   error: null,
-
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    
     case CREATE_CUSTOMER_SIIGO:
       return {
         ...state,
@@ -77,29 +78,38 @@ const rootReducer = (state = initialState, action) => {
     case CUSTOMER_DETAILS_REQUEST:
       return {
         ...state,
-        loading: true,
-        error: null,
+        customerDetails: {
+          ...state.customerDetails,
+          loading: true,
+          error: null,
+        },
       };
     case CUSTOMER_DETAILS_SUCCESS:
       return {
         ...state,
-        loading: false,
-        customer: action.payload,
+        customerDetails: {
+          ...state.customerDetails,
+          loading: false,
+          customer: action.payload,
+        },
       };
     case CUSTOMER_DETAILS_FAIL:
       return {
         ...state,
-        loading: false,
-        error: action.payload || 'An error occurred',
+        customerDetails: {
+          ...state.customerDetails,
+          loading: false,
+          error: action.payload || 'An error occurred',
+        },
       };
-      case DELETE_CUSTOMER_SIIGO:
+    case DELETE_CUSTOMER_SIIGO:
       return {
         ...state,
         customers: state.customers.filter(
           (customer) => customer.id !== action.payload
         ),
       };
-      case PUT_CUSTOMER_SIIGO:
+    case PUT_CUSTOMER_SIIGO:
       return {
         ...state,
         customers: state.customers.map((customer) =>
@@ -116,8 +126,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         taxes: action.payload,
       };
-
-      case SET_LOADING:
+    case SET_LOADING:
       return {
         ...state,
         loading: action.payload,
@@ -127,11 +136,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
       };
-      case GET_COST_CENTER_SIIGO:
-        return {
-          ...state,
-          costCenters: action.payload,
-        };
+    case GET_COST_CENTER_SIIGO:
+      return {
+        ...state,
+        costCenters: action.payload,
+      };
     case GET_USERS_SIIGO:
       return {
         ...state,
@@ -198,7 +207,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         taxes: [],
       };
-      case CLEAN_COST_CENTER_SIIGO:
+    case CLEAN_COST_CENTER_SIIGO:
       return {
         ...state,
         costCenters: [],
@@ -236,7 +245,11 @@ const rootReducer = (state = initialState, action) => {
     case CLEAN_CUSTOMER_DETAIL:
       return {
         ...state,
-        customer: {},
+        customerDetails: {
+          customer: {},
+          loading: false,
+          error: null,
+        },
       };
     default:
       return state;

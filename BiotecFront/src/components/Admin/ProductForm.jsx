@@ -24,8 +24,7 @@ const ProductForm = ({ onSubmit }) => {
   });
 
   const dispatch = useDispatch();
-  const accountGroups = useSelector(state => state.accounts);
-  const taxes = useSelector(state => state.taxes);
+  const { accounts, taxes, loading, error } = useSelector(state => state);
 
   useEffect(() => {
     dispatch(getAccountGroup());
@@ -74,6 +73,9 @@ const ProductForm = ({ onSubmit }) => {
   return (
     <form className="mt-32 max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
       <h2 className="text-2xl font-bold mb-6">Crear Producto</h2>
+
+      {loading && <p>Cargando...</p>}
+      {error && <p>Error: {error}</p>}
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
@@ -110,7 +112,7 @@ const ProductForm = ({ onSubmit }) => {
             required
           >
             <option value="" disabled>Selecciona un grupo de cuentas</option>
-            {accountGroups.map(group => (
+            {accounts.map(group => (
               <option key={group.id} value={group.id}>
                 {group.name}
               </option>
@@ -191,14 +193,14 @@ const ProductForm = ({ onSubmit }) => {
             <option value="" disabled>Selecciona un impuesto</option>
             {taxes.map(tax => (
               <option key={tax.id} value={tax.id}>
-                {tax.name}
+                {tax.name} ({tax.percentage}%)
               </option>
             ))}
           </select>
         </div>
 
         <div>
-          <label className="block text-gray-700">Tasa</label>
+          <label className="block text-gray-700">Tarifa</label>
           <input
             type="number"
             name="rate"
@@ -216,7 +218,6 @@ const ProductForm = ({ onSubmit }) => {
             value={formData.currencyCode}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
-            required
           />
         </div>
 
@@ -283,6 +284,7 @@ const ProductForm = ({ onSubmit }) => {
 };
 
 export default ProductForm;
+
 
 
   
