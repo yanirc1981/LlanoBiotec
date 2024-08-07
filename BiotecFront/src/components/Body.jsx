@@ -32,7 +32,7 @@ function Body() {
         <Card title="Card 3" description="This is the description for card 3." imageSrc="../public/biotec.png" />
       </section>
 
-      <section>
+      <section id="quienesSomos">
   <div className="py-10 ">
     <div className="flex flex-wrap justify-center mb-6 ">
     <h6 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold text-gray-700 mb-3 p-6 text-center mt-16">
