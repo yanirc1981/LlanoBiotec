@@ -53,17 +53,8 @@ code: {
   description: {
     type: DataTypes.STRING,
     allowNull: true,
-  },
+  }
   
- 
-  tariff: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  model: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
 },
     {
       timestamps: false,
