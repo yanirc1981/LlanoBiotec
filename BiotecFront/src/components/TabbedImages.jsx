@@ -44,39 +44,39 @@ const TabbedImages = () => {
   const { image, text } = getImageAndText(activeTab);
 
   return (
-    <div className="flex flex-col items-center mt-4  p-16 bg-opacity-50 bg-gray-500 rounded-lg">
-      <div className="flex justify-center mb-4 p-4 gap-6">
+    <div className="flex flex-col items-center mt-4 p-4 md:p-8 bg-opacity-50 bg-gray-500 rounded-lg">
+      <div className="flex justify-center mb-4 p-2 md:p-4 gap-2 md:gap-6 flex-wrap">
         <button
-          className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 ${activeTab === 'tab1' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg ${activeTab === 'tab1' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab1')}
         >
           Asesoría
         </button>
         <button
-          className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 mx-2 ${activeTab === 'tab2' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg mx-1 md:mx-2 ${activeTab === 'tab2' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab2')}
         >
           Distribuidor
         </button>
         <button
-          className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 mx-2 ${activeTab === 'tab3' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg mx-1 md:mx-2 ${activeTab === 'tab3' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab3')}
         >
           Calidad
         </button>
         <button
-          className={`px-4 py-2 rounded text-sm lg:text-lg lg:px-6 ${activeTab === 'tab4' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg ${activeTab === 'tab4' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab4')}
         >
           Educación
         </button>
       </div>
       <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
-        <div className="md:w-1/2  flex justify-center ">
-          <img src={image} alt="Tab Image" className="w-80 h-auto max-w-2xl lg:w-120 rounded-lg" />
+        <div className="w-full md:w-1/2 flex justify-center">
+          <img src={image} alt="Tab Image" className="w-40 md:w-80 lg:w-96 h-auto rounded-lg" />
         </div>
-        <div className="md:w-1/2 lg:w-1/3 flex flex-col items-center">
-          <p className="text-lg lg:text-2xl font-bold text-gray-700 ml-2 text-center">{text}</p>
+        <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col items-center">
+          <p className="text-sm md:text-lg lg:text-2xl font-bold text-gray-700 text-center p-2 md:p-4">{text}</p>
         </div>
       </div>
     </div>
@@ -84,4 +84,5 @@ const TabbedImages = () => {
 };
 
 export default TabbedImages;
+
 

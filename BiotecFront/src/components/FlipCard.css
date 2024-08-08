@@ -41,6 +41,19 @@
   .h-160 {
     height: 30rem; /* Doble de la altura original */
   }
+  /* Estilos responsivos para pantallas pequeñas */
+@media (max-width: 768px) { /* Ajusta el punto de interrupción según sea necesario */
+    .w-64 {
+      width: 10rem; /* Reduzca el ancho en pantallas pequeñas */
+    }
   
+    .w-70 {
+      width: 9rem; /* Ajusta el ancho si usas esta clase */
+    }
+  
+    .h-160 {
+      height: 20rem; /* Ajusta la altura en pantallas pequeñas */
+    }
+  }
   
   

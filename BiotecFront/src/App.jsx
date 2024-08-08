@@ -29,7 +29,7 @@ const App = () => {
   
   
     return (
-      <div>
+      <div className="App overflow-x-hidden">
         <Navbar />
         {!hideHeaderAndFooterRoutes.includes(location.pathname) && <Header />}
         <Routes>
