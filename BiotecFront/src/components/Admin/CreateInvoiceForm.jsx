@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTypeInvoiceSiigo } from '../../Redux/ActionsSiigo/actionsSiigo';
-import { postGenerateInvoice } from '../../Redux/ActionsSiigo/actionsSiigo'; // Asegúrate de que esta ruta sea correcta
+import { getTypeInvoiceSiigo, postGenerateInvoice, getUsersSiigo } from '../../Redux/ActionsSiigo/actionsSiigo';
 
 const CreateInvoiceForm = () => {
+  const [identification] = useState('');
   const [invoiceDate, setInvoiceDate] = useState(formatDateToYYYYMMDD(new Date().toISOString().split('T')[0]));
   const [dueDate, setDueDate] = useState('');
   const [documentType, setDocumentType] = useState('');
   const [showDueDate, setShowDueDate] = useState(false);
+  const [selectedSeller, setSelectedSeller] = useState('');
+  const [sendToDian, setSendToDian] = useState('false');
   const [customer] = useState({});
   const [costCenter] = useState('');
   const [items] = useState([]);
@@ -19,9 +21,11 @@ const CreateInvoiceForm = () => {
 
   const dispatch = useDispatch();
   const typeInvoices = useSelector((state) => state.typeInvoices);
+  const usersSiigo = useSelector((state) => state.usersSiigo);
 
   useEffect(() => {
     dispatch(getTypeInvoiceSiigo());
+    dispatch(getUsersSiigo());
   }, [dispatch]);
 
   useEffect(() => {
@@ -45,7 +49,7 @@ const CreateInvoiceForm = () => {
       customer: {
         person_type: customer.person_type,
         id_type: customer.id_type,
-        identification: customer.identification,
+        identification: identification,
         branch_office: customer.branch_office || 0,
         name: customer.name,
         address: {
@@ -73,9 +77,9 @@ const CreateInvoiceForm = () => {
         ],
       },
       cost_center: costCenter,
-      seller: order.seller,
+      seller: selectedSeller,  
       stamp: {
-        send: order.sendToDian || false,
+        send: sendToDian === 'true',
       },
       mail: {
         send: order.sendToEmail,
@@ -104,8 +108,9 @@ const CreateInvoiceForm = () => {
     }
   };
 
+
   return (
-    <div className="max-w-4xl mx-auto p-4">
+    <div className="max-w-4xl mx-auto p-4 mt-32">
       <h2 className="text-2xl font-bold mb-4">Crear Factura</h2>
       <div className="bg-white p-6 rounded-lg shadow-lg">
         <form onSubmit={handleSubmit}>
@@ -149,12 +154,43 @@ const CreateInvoiceForm = () => {
                 type="date"
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                min={invoiceDate} // Asegura que la fecha de vencimiento sea después de la fecha de comprobante
+                min={invoiceDate} 
                 className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
             </div>
-          )}
-          {/* Añade aquí los campos adicionales como customer, costCenter, items, order, etc. */}
+          )} 
+          <div className="mb-4">
+          <label htmlFor="seller" className="block text-sm font-medium text-gray-700 ">
+        Seleccionar Vendedor
+      </label>
+      <select
+        id="seller"
+        value={selectedSeller}
+        onChange={(e) => setSelectedSeller(e.target.value)}
+        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+      >
+        <option value="">Seleccione un vendedor</option>
+        {usersSiigo.map((user) => (
+          <option key={user.id} value={user.id}>
+            {user.name}
+          </option>
+        ))}
+      </select>
+      </div>
+      <div>
+      <label htmlFor="sendToDian" className="block text-sm font-medium text-gray-700 mt-4">
+        Enviar a DIAN
+      </label>
+      <select
+        id="sendToDian"
+        value={sendToDian}
+        onChange={(e) => setSendToDian(e.target.value)}
+        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+      >
+        <option value="false">No</option>
+        <option value="true">Sí</option>
+      </select>
+      </div>
           <button
             type="submit"
             className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
