@@ -29,9 +29,9 @@ const Navbar = () => {
     <nav className="bg-amber-600 text-white p-4 fixed top-0 w-full z-50">
       <div className="container mx-auto flex justify-between items-center px-4">
         <div className="text-xl font-bold cursor-pointer flex items-center" onClick={handleLogoClick}>
-          <img src={logo} alt="Logo" className="w-24 h-auto" />
+          <img src={logo} alt="Logo" className="w-32 h-auto md:w-64" />
         </div>
-        <div className="hidden md:flex space-x-4 items-center">
+        <div className="hidden md:flex space-x-12 items-center">
           <a
             href="/"
             className="text-zinc-700 text-xl font-semibold tracking-wide hover:text-white"
