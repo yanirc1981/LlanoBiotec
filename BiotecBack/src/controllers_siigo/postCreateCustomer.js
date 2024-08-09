@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
 
     // Modificar los datos al formato requerido por la API
     const body = {
-      type: originalData.type,
+      
       person_type: originalData.person_type,
       id_type: originalData.id_type,
       identification: originalData.identification,
@@ -58,6 +58,17 @@ module.exports = async (req, res) => {
       },
     };
 
+
+   
+    //  const customersResponse = await axios.post('https://private-anon-e45f86fe00-siigoapi.apiary-mock.com/v1/customers/id', body, {
+    //     headers: {
+    //    'Content-Type': 'application/json',
+    //    'Authorization': `Bearer ${accessToken}`,
+    //    'Partner-Id': 'PARTNER_ID'
+    // },
+     
+    // });
+
     // Guardar el cliente en la base de datos local
     const newCustomerLocal = await Customer.create({
       type: originalData.type,
@@ -86,6 +97,7 @@ module.exports = async (req, res) => {
       seller_id: originalData.seller_id,
       collector_id: originalData.collector_id,
     });
+
 
     // Enviar el cliente a la API de Siigo
     const customersResponse = await axios.post(

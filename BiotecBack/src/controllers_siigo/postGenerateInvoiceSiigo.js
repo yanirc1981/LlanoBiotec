@@ -1,4 +1,4 @@
-const { Order, Customer, User } = require('../data');
+const {  Customer, User } = require('../data');
 const { PARTNER_ID } = require('../config/envs');
 const axios = require('axios');
 const getAccessToken = require('./getAccessToken');
@@ -15,10 +15,10 @@ module.exports = async (req, res) => {
     const costCenter = parseInt(data.sendToCostCenters);
     const today = new Date();
     const formattedDate = today.toISOString().split('T')[0];
-    const orderId = data.orderId;
+    
 
     // Obtener la orden y el cliente
-    const order = await Order.findOne({ where: { id: orderId } });
+    
     const value = parseInt(order.totalPrice.toFixed(2));
     const customerId = order.id_customer;
     const customer = await Customer.findOne({ where: { id: customerId } });

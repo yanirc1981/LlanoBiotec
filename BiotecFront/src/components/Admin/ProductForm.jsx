@@ -1,47 +1,56 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createProductSiigo } from '../../Redux/ActionsSiigo/actionsSiigo';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createProductSiigo,
+  getAccountGroup,
+  getTaxes,
+} from "../../Redux/ActionsSiigo/actionsSiigo";
+import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line react/prop-types, no-unused-vars
 const ProductForm = ({ onSubmit }) => {
   const [formData, setFormData] = useState({
-    code: '',
-    name: '',
-    account: '',
+    code: "",
+    name: "",
+    account_group: "",
     stockControl: false,
-    tax_classification: 'Taxed',
+    tax_classification: "Taxed",
     taxIncluded: false,
     taxConsumptionValue: 0,
-    idTax: '',
-    rate: '',
-    currencyCode: 'COP',
+    idTax: "",
+    rate: "",
+    currencyCode: "COP",
     position: 1,
     price: 0,
-    unit: '',
-    unit_label: 'unidad',
-    description: '',
-    tariff: '',
-    model: ''
+    unit: "94",
+    unit_label: "unidad",
+    description: "",
   });
 
   const dispatch = useDispatch();
+  const { accounts, taxes, loading, error } = useSelector((state) => state);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(getAccountGroup());
+    dispatch(getTaxes());
+  }, [dispatch]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Crear el payload según la estructura esperada por la API de Siigo
     const payload = {
       code: formData.code,
       name: formData.name,
-      account: formData.account,
+      account_group: formData.account_group,
       stockControl: formData.stockControl,
       tax_classification: formData.tax_classification,
       taxIncluded: formData.taxIncluded,
@@ -54,25 +63,35 @@ const ProductForm = ({ onSubmit }) => {
       unit: formData.unit,
       unit_label: formData.unit_label,
       description: formData.description,
-      tariff: formData.tariff,
-      model: formData.model
     };
 
-    
-    console.log('Datos a enviar:', JSON.stringify(payload, null, 2));
+    console.log("Datos a enviar:", JSON.stringify(payload, null, 2));
     const response = await dispatch(createProductSiigo(payload));
 
     if (response.success) {
-      alert('Producto creado correctamente');
+      alert("Producto creado correctamente");
     } else {
       alert(`Error al crear el producto: ${response.errorMessage}`);
     }
   };
 
   return (
-    <form className="max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg" onSubmit={handleSubmit}>
-      <h2 className="text-2xl font-bold mb-6">Crear Producto</h2>
-      
+    <form
+      className="mt-32 max-w-3xl mx-auto p-6 bg-white shadow-md rounded-lg"
+      onSubmit={handleSubmit}
+    >
+      <div className="flex items-center justify-between">
+        <h2 className="text-2xl font-bold mb-6">Crear Producto</h2>
+        <button
+          onClick={() => navigate("/panel")}
+          className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+        >
+          Volver
+        </button>
+      </div>
+      {loading && <p>Cargando...</p>}
+      {error && <p>Error: {error}</p>}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-gray-700">Código del Producto</label>
@@ -100,14 +119,22 @@ const ProductForm = ({ onSubmit }) => {
 
         <div>
           <label className="block text-gray-700">Grupo de Cuentas</label>
-          <input
-            type="number"
-            name="account"
-            value={formData.account}
+          <select
+            name="account_group"
+            value={formData.account_group}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
             required
-          />
+          >
+            <option value="" disabled>
+              Selecciona un grupo de cuentas
+            </option>
+            {accounts.map((group) => (
+              <option key={group.id} value={group.id}>
+                {group.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
@@ -135,9 +162,10 @@ const ProductForm = ({ onSubmit }) => {
           <label className="text-gray-700">Control de Inventario</label>
         </div>
 
-
         <div>
-          <label className="block text-gray-700">Clasificación de Impuesto</label>
+          <label className="block text-gray-700">
+            Clasificación de Impuesto
+          </label>
           <select
             name="tax_classification"
             value={formData.tax_classification}
@@ -162,7 +190,9 @@ const ProductForm = ({ onSubmit }) => {
         </div>
 
         <div>
-          <label className="block text-gray-700">Valor del Impuesto al Consumo</label>
+          <label className="block text-gray-700">
+            Valor del Impuesto al Consumo
+          </label>
           <input
             type="number"
             name="taxConsumptionValue"
@@ -174,16 +204,26 @@ const ProductForm = ({ onSubmit }) => {
 
         <div>
           <label className="block text-gray-700">ID del Impuesto</label>
-          <input
-            type="number"
+          <select
             name="idTax"
             value={formData.idTax}
             onChange={handleChange}
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
+            required
+          >
+            <option value="" disabled>
+              Selecciona un impuesto
+            </option>
+            {taxes.map((tax) => (
+              <option key={tax.id} value={tax.id}>
+                {tax.name} ({tax.percentage}%)
+              </option>
+            ))}
+          </select>
         </div>
+
         <div>
-          <label className="block text-gray-700">Tasa</label>
+          <label className="block text-gray-700">Tarifa</label>
           <input
             type="number"
             name="rate"
@@ -205,7 +245,7 @@ const ProductForm = ({ onSubmit }) => {
         </div>
 
         <div>
-          <label className="block text-gray-700">Posición de Lista de Precios</label>
+          <label className="block text-gray-700">Posición</label>
           <input
             type="number"
             name="position"
@@ -216,7 +256,7 @@ const ProductForm = ({ onSubmit }) => {
         </div>
 
         <div>
-          <label className="block text-gray-700">Valor de Lista de Precios</label>
+          <label className="block text-gray-700">Precio</label>
           <input
             type="number"
             name="price"
@@ -248,18 +288,7 @@ const ProductForm = ({ onSubmit }) => {
           />
         </div>
 
-        <div>
-          <label className="block text-gray-700">Referencia</label>
-          <input
-            type="text"
-            name="reference"
-            value={formData.reference}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
-        </div>
-
-        <div className="md:col-span-2">
+        <div className="col-span-2">
           <label className="block text-gray-700">Descripción</label>
           <textarea
             name="description"
@@ -268,30 +297,12 @@ const ProductForm = ({ onSubmit }) => {
             className="w-full px-3 py-2 border border-gray-300 rounded-md"
           ></textarea>
         </div>
-        <div>
-          <label className="block text-gray-700">Arancel</label>
-          <input
-            type="text"
-            name="tariff"
-            value={formData.tariff}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
-        </div>
-
-        <div>
-          <label className="block text-gray-700">Modelo</label>
-          <input
-            type="text"
-            name="model"
-            value={formData.model}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md"
-          />
-        </div>
       </div>
 
-      <button type="submit" className="w-full mt-6 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600">
+      <button
+        type="submit"
+        className="w-full mt-6 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600"
+      >
         Crear Producto
       </button>
     </form>
@@ -299,6 +310,3 @@ const ProductForm = ({ onSubmit }) => {
 };
 
 export default ProductForm;
-
-
-  

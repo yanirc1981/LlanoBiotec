@@ -49,21 +49,27 @@ const Register = () => {
         is_admin: true
       });
       console.log('Admin registered:', response.data);
-      navigate('/login'); // Redirige al usuario a la página de inicio de sesión
+      navigate('/panel'); // Redirige al usuario a la página de inicio de sesión
     } catch (error) {
       setError('Error registering admin');
       console.error('Error registering admin:', error);
     }
   };
 
-  const handleLoginRedirect = () => {
-    navigate('/login'); // Redirige al usuario a la página de login
-  };
+ 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 mt-8">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
+      <div className="flex items-center justify-between">
+    <h2 className="text-2xl font-bold mb-6">Registrar Administrador</h2>
+    <button
+      onClick={() => navigate("/panel")}
+      className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+    >
+      Volver
+    </button>
+  </div>
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -81,7 +87,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="first_name" className="block text-gray-700 font-bold mb-2">
-              First Name
+              Nombre
             </label>
             <input
               type="text"
@@ -94,7 +100,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="last_name" className="block text-gray-700 font-bold mb-2">
-              Last Name
+              Apellido
             </label>
             <input
               type="text"
@@ -120,7 +126,7 @@ const Register = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="confirmPass" className="block text-gray-700 font-bold mb-2">
-              Confirm Password
+              Confirmar Password
             </label>
             <input
               type="password"
@@ -134,20 +140,13 @@ const Register = () => {
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+              className="w-full bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
             >
               Crear Cuenta
             </button>
           </div>
         </form>
-        <div className="flex items-center justify-center mt-4">
-          <button
-            onClick={handleLoginRedirect}
-            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
-          >
-            Ya tengo Cuenta
-          </button>
-        </div>
+       
       </div>
     </div>
   );

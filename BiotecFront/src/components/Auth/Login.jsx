@@ -1,12 +1,24 @@
-import { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../Redux/ActionsSiigo/actionsSiigo';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { error, loading, isAuthenticated } = useSelector((state) => ({
+    error: state.error,
+    loading: state.loading,
+    isAuthenticated: state.isAuthenticated,
+  }));
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/panel');
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -16,22 +28,9 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setError(null);
-
-    try {
-      const response = await axios.post('http://localhost:3001/auth/login', { email, password });
-      localStorage.setItem('token', response.data.token);
-      navigate('/panel'); // Redirige al dashboard después del login
-    } catch (error) {
-      setError('Invalid credentials');
-      console.error('Error logging in:', error);
-    }
-  };
-
-  const handleGoogleLogin = () => {
-    navigate('/register'); // Redirige a la página de registro para crear una nueva cuenta de admin
+    dispatch(login(email, password));
   };
 
   return (
@@ -69,20 +68,13 @@ const Login = () => {
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+              className="w-full bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-blue-600"
+              disabled={loading}
             >
-              Ingresar
+              {loading ? 'Loading...' : 'Ingresar'}
             </button>
           </div>
         </form>
-        <div className="flex items-center justify-center mt-4">
-          <button
-            onClick={handleGoogleLogin}
-            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
-          >
-            Nueva Cuenta Admin
-          </button>
-        </div>
       </div>
     </div>
   );

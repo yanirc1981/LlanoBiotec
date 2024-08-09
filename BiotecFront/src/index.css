@@ -1,5 +1,49 @@
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.perspective {
+  perspective: 1000px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s;
+}
+
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  background-color: #1e40af; /* Azul */
+  color: #ffffff; /* Blanco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-back {
+  background-color: #d97706; /* Ámbar */
+  color: #ffffff; /* Blanco */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: rotateY(180deg);
+}
+
+.header-container {
+  margin-top: 120px; /* Ajusta esto según sea necesario */
+}
+

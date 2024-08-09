@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
     };
  console.log(data)
     //Realizar la solicitud a la API con los datos modificados
-    // const response = await axios.put(`https://api.siigo.com/v1/customers/${id}`, data, {
+    // const response = await axios.put(`https://private-anon-e45f86fe00-siigoapi.apiary-mock.com/v1/customers/id`, data, {
     //     headers: {
     //    'Content-Type': 'application/json',
     //    'Authorization': `Bearer ${accessToken}`,
@@ -103,35 +103,3 @@ module.exports = async (req, res) => {
 
 
 
-// const updateCustomer = async (req, res) => {
-//     const { id } = req.params; // Obtener el ID de los parámetros de la URL
-//     const newData = req.body; // Obtener los nuevos datos del cuerpo de la solicitud
-  
-//     try {
-//       const url = `https://api.siigo.com/v1/customers/${id}`; // Concatenar el ID a la URL
-//       const accessToken = '[tu-token-de-autenticación]'; // Token de autenticación necesario para la API externa
-  
-//       var request = new XMLHttpRequest();
-//       request.open('PUT', url);
-//       request.setRequestHeader('Content-Type', 'application/json');
-//       request.setRequestHeader('Authorization', `Bearer ${accessToken}`);
-//       request.setRequestHeader('Partner-Id', 'NombreDeTuAplicacion');
-  
-//       request.onreadystatechange = function () {
-//         if (this.readyState === 4) {
-//           console.log('Status:', this.status);
-//           console.log('Headers:', this.getAllResponseHeaders());
-//           console.log('Body:', this.responseText);
-//           // Puedes enviar la respuesta al cliente o manejarla como desees
-//           res.json({ status: this.status, body: this.responseText });
-//         }
-//       };
-  
-//       request.send(JSON.stringify(newData)); // Enviar los nuevos datos en el cuerpo de la solicitud
-//     } catch (error) {
-//       // Si ocurre un error, devuelve un mensaje de error al cliente
-//       res.status(500).json({ error: error.message });
-//     }
-//   };
-  
-//   module.exports = { updateCustomer };

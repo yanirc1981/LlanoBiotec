@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 import {
+  SET_LOADING,
+  SET_ERROR,
   CLEAN_ACCOUNT_GROUP,
   CLEAN_COST_CENTER_SIIGO,
   CLEAN_CUSTOMERS_SIIGO,
@@ -33,7 +35,11 @@ import {
   POST_GENERATE_INVOICE,
   PUT_CUSTOMER_SIIGO,
   PUT_PRODUCT_SIIGO,
-  DELETE_CUSTOMER_SIIGO
+  DELETE_CUSTOMER_SIIGO,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  LOGOUT
 } from './actions-types-siigo';
 
 //const BASE_URL = 'https://lacteos7maravillas.onrender.com';
@@ -112,27 +118,42 @@ export const deleteCustomerSiigo = (id) => async (dispatch) => {
   }
 };
 
-export const getAccountGroup = (/*{ headers }*/) => async (dispatch) => {
+export const setLoading = (loading) => ({
+  type: SET_LOADING,
+  payload: loading,
+});
+
+export const setError = (error) => ({
+  type: SET_ERROR,
+  payload: error,
+});
+
+
+export const getAccountGroup = () => async (dispatch) => {
+  dispatch(setLoading(true));
   try {
     const url = `${BASE_URL}/siigo/account-group`;
-    const { data } = await axios.get(url /*{ headers }*/);
+    const { data } = await axios.get(url);
 
     dispatch({ type: GET_ACCOUNT_GROUP, payload: data.data });
-    return { success: true }; // Indica que la solicitud fue exitosa
+    dispatch(setLoading(false));
   } catch (error) {
-    return { success: false, errorMessage: error.message }; // Indica que hubo un error con un mensaje específico
+    dispatch(setError(error.message));
+    dispatch(setLoading(false));
   }
 };
 
-export const getTaxes = (/*{ headers }*/) => async (dispatch) => {
+export const getTaxes = () => async (dispatch) => {
+  dispatch(setLoading(true));
   try {
     const url = `${BASE_URL}/siigo/taxes`;
-    const { data } = await axios.get(url /*{ headers }*/);
+    const { data } = await axios.get(url);
 
     dispatch({ type: GET_TAXES, payload: data.data });
-    return { success: true }; // Indica que la solicitud fue exitosa
+    dispatch(setLoading(false));
   } catch (error) {
-    return { success: false, errorMessage: error.message }; // Indica que hubo un error con un mensaje específico
+    dispatch(setError(error.message));
+    dispatch(setLoading(false));
   }
 };
 
@@ -412,4 +433,30 @@ export const cleanCustomerDetails = () => {
   } catch (error) {
     throw new Error(error);
   }
+};
+
+export const login = (email, password) => async (dispatch) => {
+  dispatch({ type: LOGIN_REQUEST });
+
+  try {
+    const response = await axios.post(`${BASE_URL}/auth/login`, { email, password });
+    const { token } = response.data;
+
+    localStorage.setItem('token', token);
+
+    dispatch({
+      type: LOGIN_SUCCESS,
+      payload: { email, token }
+    });
+  } catch (error) {
+    dispatch({
+      type: LOGIN_FAILURE,
+      payload: error.response ? error.response.data.message : error.message
+    });
+  }
+};
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('token');
+  dispatch({ type: LOGOUT });
 };
