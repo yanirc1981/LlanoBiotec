@@ -45,7 +45,7 @@ import {
 //const BASE_URL = 'https://lacteos7maravillas.onrender.com';
 const BASE_URL = 'https://llanoweb.onrender.com';
 //const BASE_URL = 'http://localhost:3001';
-
+//
 export const createCustomerSiigo = (input) => async (dispatch) => {
   try {
     const url = `${BASE_URL}/siigo/createCustomers`;
