@@ -43,8 +43,8 @@ import {
 } from './actions-types-siigo';
 
 //const BASE_URL = 'https://lacteos7maravillas.onrender.com';
-//const BASE_URL = 'https://lacteos7maravillas-back.vercel.app';
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'https://llanoweb.onrender.com';
+//const BASE_URL = 'http://localhost:3001';
 
 export const createCustomerSiigo = (input) => async (dispatch) => {
   try {
