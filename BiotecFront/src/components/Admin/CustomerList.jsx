@@ -78,7 +78,7 @@ const CustomerList = () => {
           />
           <button
             onClick={handleUpdateCustomer}
-            className="mt-2 px-4 py-2 bg-indigo-600 text-white rounded-md"
+            className="mt-2 px-4 py-2 bg-green-700 text-white rounded-md"
           >
             Actualizar Cliente
           </button>

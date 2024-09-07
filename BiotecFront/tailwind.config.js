@@ -11,6 +11,9 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors:{
+        fondo:"#3ca935",
+      },
       keyframes: {
         moveBackground: {
           '0%': { backgroundPosition: '0% 50%' },

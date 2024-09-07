@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import guzerat from '../assets/guzerat.png';
-import gyr from '../assets/gyr.png';
-import jersey from '../assets/jersey.png';
-import brahman from '../assets/brahman.png';
+import guzerat1 from '../assets/guzerat1.png';
+import gyr from '../assets/gyr1.png';
+import jersey from '../assets/jersey1.png';
+import brahman from '../assets/img2.png';
 
 const TabbedImages = () => {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -15,7 +15,7 @@ const TabbedImages = () => {
     switch (tab) {
       case 'tab1':
         return {
-          image: guzerat,
+          image: guzerat1,
           text: 'Asesoría en mejoramiento genérico. Mejora parámetros productivos(carne y leche). Busca mejorar la eficiencia productiva. Mejor relación entre conformación y salud mamaria.',
         };
       case 'tab2':
@@ -26,16 +26,16 @@ const TabbedImages = () => {
       case 'tab3':
         return {
           image: jersey,
-          text: 'Con LLanoBioTec tendrás asegurada una calidad inigualable, nos destacamos por el manejo de buenas prácticas donde se hará la implementación de varios procesos con tecnología de ultima calidad en el mercado..',
+          text: 'Con LLanoBioTec tendrás asegurada una calidad inigualable, nos destacamos por el manejo de buenas prácticas donde se hará la implementación de varios procesos con tecnología de ultima calidad en el mercado.',
         };
       case 'tab4':
         return {
           image: brahman,
-          text: 'También somos educación tecnología, turismo y producción para la evolución de la región llanera y de Restrepo Meta..',
+          text: 'También somos educación tecnología, turismo y producción para la evolución de la región llanera y de Restrepo Meta.',
         };
       default:
         return {
-          image: guzerat,
+          image: guzerat1,
           text: 'Texto explicativo por defecto.',
         };
     }
@@ -45,38 +45,43 @@ const TabbedImages = () => {
 
   return (
     <div className="flex flex-col items-center mt-4 p-4 md:p-8 bg-opacity-50 bg-gray-500 rounded-lg">
-      <div className="flex justify-center mb-4 p-2 md:p-4 gap-2 md:gap-6 flex-wrap">
+      <div className="flex justify-center mb-4 p-2 md:p-4 gap-2 md:gap-6 flex-wrap ">
         <button
-          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg ${activeTab === 'tab1' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg ${activeTab === 'tab1' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab1')}
         >
           Asesoría
         </button>
         <button
-          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg mx-1 md:mx-2 ${activeTab === 'tab2' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg mx-1 md:mx-2 ${activeTab === 'tab2' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab2')}
         >
           Distribuidor
         </button>
         <button
-          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg mx-1 md:mx-2 ${activeTab === 'tab3' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg mx-1 md:mx-2 ${activeTab === 'tab3' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab3')}
         >
           Calidad
         </button>
         <button
-          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg ${activeTab === 'tab4' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-600'}`}
+          className={`px-2 py-1 md:px-4 md:py-2 rounded text-sm lg:text-lg ${activeTab === 'tab4' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-600'}`}
           onClick={() => handleTabClick('tab4')}
         >
           Educación
         </button>
       </div>
-      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8">
+      {/* Añadimos un contenedor con un tamaño fijo */}
+      <div className="w-full md:w-1/2 lg:w-2/3 h-96 flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4 lg:space-x-8 bg-gray-300 p-4 rounded-lg shadow-lg">
         <div className="w-full md:w-1/2 flex justify-center">
-          <img src={image} alt="Tab Image" className="w-40 md:w-80 lg:w-96 h-auto rounded-lg" />
+          <img 
+            src={image} 
+            alt="Tab Image" 
+            className="w-40 h-40 md:w-80 md:h-80 object-cover rounded-lg" 
+          />
         </div>
         <div className="w-full md:w-1/2 lg:w-1/3 flex flex-col items-center">
-          <p className="text-sm md:text-lg lg:text-2xl font-bold text-gray-700 text-center p-2 md:p-4">{text}</p>
+          <p className="text-sm md:text-lg lg:text-2xl font-bold text-gray-700 text-center">{text}</p>
         </div>
       </div>
     </div>
@@ -84,5 +89,3 @@ const TabbedImages = () => {
 };
 
 export default TabbedImages;
-
-

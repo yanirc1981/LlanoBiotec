@@ -84,7 +84,7 @@ const ProductForm = ({ onSubmit }) => {
         <h2 className="text-2xl font-bold mb-6">Crear Producto</h2>
         <button
           onClick={() => navigate("/panel")}
-          className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+          className="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-400"
         >
           Volver
         </button>
@@ -301,7 +301,7 @@ const ProductForm = ({ onSubmit }) => {
 
       <button
         type="submit"
-        className="w-full mt-6 bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600"
+        className="w-full mt-6 bg-green-700 text-white py-2 rounded-md hover:bg-green-600"
       >
         Crear Producto
       </button>

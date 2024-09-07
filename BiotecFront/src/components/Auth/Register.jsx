@@ -65,7 +65,7 @@ const Register = () => {
     <h2 className="text-2xl font-bold mb-6">Registrar Administrador</h2>
     <button
       onClick={() => navigate("/panel")}
-      className="rounded-md bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
+      className="rounded-md bg-green-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-400"
     >
       Volver
     </button>
@@ -140,7 +140,7 @@ const Register = () => {
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-orange-600"
+              className="w-full bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
             >
               Crear Cuenta
             </button>

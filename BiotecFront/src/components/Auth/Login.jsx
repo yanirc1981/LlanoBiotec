@@ -68,7 +68,7 @@ const Login = () => {
           <div className="mb-4">
             <button
               type="submit"
-              className="w-full bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 focus:outline-none focus:bg-blue-600"
+              className="w-full bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:bg-blue-600"
               disabled={loading}
             >
               {loading ? 'Loading...' : 'Ingresar'}

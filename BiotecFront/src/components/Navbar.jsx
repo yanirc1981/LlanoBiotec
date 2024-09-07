@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-amber-600 text-white p-4 fixed top-0 w-full z-50">
+    <nav className="bg-fondo text-white p-4 fixed top-0 w-full z-50">
       <div className="container mx-auto flex justify-between items-center px-4">
         <div className="text-xl font-bold cursor-pointer flex items-center" onClick={handleLogoClick}>
           <img src={logo} alt="Logo" className="w-32 h-auto md:w-64" />
@@ -34,26 +34,26 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-12 items-center">
           <a
             href="/"
-            className="text-zinc-700 text-xl font-semibold tracking-wide hover:text-white"
+            className="text-zinc-200 text-xl font-semibold tracking-wide hover:text-white"
           >
             Home
           </a>
           <a
             href="#quienesSomos"
-            className="text-zinc-700 text-xl font-semibold tracking-wide hover:text-white"
+            className="text-zinc-300 text-xl font-semibold tracking-wide hover:text-white"
           >
             Quienes Somos
           </a>
           <a
             href="#contacto"
-            className="text-zinc-700 text-xl font-semibold tracking-wide hover:text-white"
+            className="text-zinc-300 text-xl font-semibold tracking-wide hover:text-white"
           >
             Contacto
           </a>
           <div className="relative">
             <button
               onClick={toggleMenu}
-              className="text-zinc-700 text-xl font-semibold tracking-wide hover:text-white focus:outline-none"
+              className="text-zinc-300 text-xl font-semibold tracking-wide hover:text-white focus:outline-none"
             >
               Panel
             </button>
@@ -62,7 +62,7 @@ const Navbar = () => {
                 {!isAuthenticated ? (
                   <a
                     href="/login"
-                    className="block px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white"
+                    className="block px-4 py-2 text-gray-800 hover:bg-green-700 hover:text-white"
                   >
                     Login
                   </a>
@@ -70,7 +70,7 @@ const Navbar = () => {
                   <>
                     <button
                       onClick={handleLogout}
-                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white"
+                      className="block w-full text-left px-4 py-2 text-gray-800 hover:bg-green-700 hover:text-white"
                     >
                       Logout
                     </button>
@@ -102,7 +102,7 @@ const Navbar = () => {
                     {({ active }) => (
                       <a
                         href="/"
-                        className={`block px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white ${active ? 'bg-amber-600 text-white' : 'text-gray-800'}`}
+                        className={`block px-4 py-2 text-gray-800 hover:bg-green-700 hover:text-white ${active ? 'bg-green-700 text-white' : 'text-gray-800'}`}
                       >
                         Home
                       </a>
@@ -112,7 +112,7 @@ const Navbar = () => {
                     {({ active }) => (
                       <a
                         href="#quienesSomos"
-                        className={`block px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white ${active ? 'bg-amber-600 text-white' : 'text-gray-800'}`}
+                        className={`block px-4 py-2 text-gray-800 hover:bg-green-700 hover:text-white ${active ? 'bg-green-700 text-white' : 'text-gray-800'}`}
                       >
                         Quienes Somos
                       </a>
@@ -122,7 +122,7 @@ const Navbar = () => {
                     {({ active }) => (
                       <a
                         href="#contacto"
-                        className={`block px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white ${active ? 'bg-amber-600 text-white' : 'text-gray-800'}`}
+                        className={`block px-4 py-2 text-gray-800 hover:bg-green-700 hover:text-white ${active ? 'bg-green-700 text-white' : 'text-gray-800'}`}
                       >
                         Contacto
                       </a>
@@ -133,7 +133,7 @@ const Navbar = () => {
                       {({ active }) => (
                         <a
                           href="/login"
-                          className={`block px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white ${active ? 'bg-amber-600 text-white' : 'text-gray-800'}`}
+                          className={`block px-4 py-2 text-gray-800 hover:bg-green-700 hover:text-white ${active ? 'bg-green-700 text-white' : 'text-gray-800'}`}
                         >
                           Login
                         </a>
@@ -144,7 +144,7 @@ const Navbar = () => {
                       {({ active }) => (
                         <button
                           onClick={handleLogout}
-                          className={`block w-full text-left px-4 py-2 text-gray-800 hover:bg-amber-600 hover:text-white ${active ? 'bg-amber-600 text-white' : 'text-gray-800'}`}
+                          className={`block w-full text-left px-4 py-2 text-gray-800 hover:bg-green-700 hover:text-white ${active ? 'bg-green-700 text-white' : 'text-gray-800'}`}
                         >
                           Logout
                         </button>

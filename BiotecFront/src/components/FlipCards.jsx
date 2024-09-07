@@ -4,9 +4,9 @@ import "./FlipCard.css";
 import PropTypes from "prop-types";
 // import { FaProjectDiagram, FaCogs, FaGlobe, FaHandshake } from "react-icons/fa"; // Iconos no son necesarios
 import vacasx4 from '../assets/vaca2.jpg';
-import vaca1 from '../assets/vaca1.jpg';
-import yerseyBrahman from '../assets/yerseyBrahman.jpg';
-import vacasVarias from '../assets/vacasVarias.jpg';
+import vaca1 from '../assets/jersey.png';
+import yerseyBrahman from '../assets/jersey1.png';
+import vacasVarias from '../assets/varias5.png';
 
 const FlipCard = ({ frontText, backTitle, backSteps, backHighlight, frontColor, backColor, frontImage }) => {
   return (
@@ -53,7 +53,7 @@ const FlipCards = () => {
         backSteps={[
           "Recolección de Requisitos y Planificación"
         ]}
-        backHighlight="Calidad"
+        backHighlight="Calidad y Ganado Saludable"
         frontColor="bg-customBlue"
         backColor="bg-customRed"
         frontImage={vaca1}
@@ -66,7 +66,7 @@ const FlipCards = () => {
           "Implementación de Funcionalidades",
           "Pruebas Continuas"
         ]}
-        backHighlight="Desarrollo"
+        backHighlight="Desarrollo Economico y Social"
         frontColor="bg-customGreen"
         backColor="bg-customYellow"
         frontImage={vacasVarias} 
@@ -80,7 +80,7 @@ const FlipCards = () => {
           "Preparación de Producción",
           "Despliegue"
         ]}
-        backHighlight="Distribución"
+        backHighlight="Responsabilidad Ambiental y Bienestar Animal"
         frontColor="bg-customPurple"
         backColor="bg-customPink"
         frontImage={yerseyBrahman} // Ruta de la imagen de fondo para la tercera tarjeta
@@ -93,7 +93,7 @@ const FlipCards = () => {
           "Actualizaciones Regulares",
           "Soporte Técnico"
         ]}
-        backHighlight="Educación"
+        backHighlight=" Prácticas Agrícolas Sostenibles y responsables"
         frontColor="bg-customPurple"
         backColor="bg-customBlue"
         frontImage={vacasx4} // Ruta de la imagen de fondo para la cuarta tarjeta
